@@ -5,7 +5,7 @@ import { useState } from 'react'
 //coomponente de pantalla de login
 import { Text, View, TextInput, Button } from 'react-native'
 
-export const loginScreen = () => {
+export const loginScreen = ({ goToRegister }) => {
     //importamos los estadi 
     const { login, loading } = useAuth();
 
@@ -32,6 +32,7 @@ export const loginScreen = () => {
             <TextInput placeholder='Email' value={email} onChangeText={setEmail} />
             <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry />
             <Button title={loading ? 'Iniciando sesion' : 'Iniciar Sesion'} onPress={handleLogin} />
+            <Button title='No tengo una cuenta' onPress={goToRegister} />
         </View>
     )
 

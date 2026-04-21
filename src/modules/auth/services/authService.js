@@ -10,9 +10,26 @@ export const signInWithEmail = async (email, password) => {
         password
     });
     if (error) throw new Error("Error por iniciar sesion ");
-    console.log("Inicio sesion correctamente:", data?.user?.email);
-
     return data;
 
-
 };
+
+
+//creamos una funcion de email , password y nombre para registrar usuarios
+export const signUpWithEmail = async (email, password, nombre) => {
+    ///limpiamos el email para evitar errores de formato
+    email = email.trim().toLowerCase();
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    if (error) throw new Error(error.message);
+
+    const userId = data?.user?.id;
+    if (!userId) {
+        throw new Error("No se pudo obtener el usuario registrado.");
+    }
+
+    const { error: profileError } = await supabase.from("perfiles").insert([
+        { id: userId, nombre }
+    ]);
+    if (profileError) throw new Error(profileError.message);
+};
+
