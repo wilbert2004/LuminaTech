@@ -1,5 +1,5 @@
 //importamo react de usestate 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 //importamos la funcion de authservice para iniciar sesion
 import { signInWithEmail } from '../services/authService'
 
@@ -7,17 +7,23 @@ import { signInWithEmail } from '../services/authService'
 export const useAuth = () => {
     //crearemos estadopara verificar 
     const [loading, setloading] = useState(false);
+    const loginLock = useRef(false);
 
     //crearemos una funcio para iniciar sesion con email y password
     const login = async (email, password) => {
+        if (loginLock.current) return;
+
         try {
+            loginLock.current = true;
             setloading(true);
             await signInWithEmail(email, password);
         } catch (error) {
             //debugeando el error
             console.error(error.message);
+            throw error;
 
         } finally {
+            loginLock.current = false;
             setloading(false);
         };
     }
