@@ -10,15 +10,25 @@ export const RegisterScreen = ({ goToLogin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [nombre, setNombre] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     //crearemos un funcion para manejar el registro de usuarios
     const handleRegister = async () => {
+        // Validar que los campos no estén vacíos
+        if (!nombre.trim() || !email.trim() || !password.trim()) {
+            alert("Por favor completa todos los campos");
+            return;
+        }
         try {
+            setLoading(true);
             await signUpWithEmail(email, password, nombre);
             alert("Registro exitoso");
             goToLogin();
         } catch (error) {
             alert(error.message);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -35,8 +45,8 @@ export const RegisterScreen = ({ goToLogin }) => {
             <Text style={Loginstyle.textParrafo}>Ingresa tu password por favor</Text>
             <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry style={Loginstyle.inputL} />
 
-            <TouchableOpacity onPress={handleRegister} style={Loginstyle.buttonL}>
-                <Text style={Loginstyle.buttonText}>Registrarse</Text>
+            <TouchableOpacity onPress={handleRegister} style={Loginstyle.buttonL} disabled={loading}>
+                <Text style={Loginstyle.buttonText}>{loading ? 'Registrando...' : 'Registrarse'}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={Loginstyle.buttonL} onPress={goToLogin}>
                 <Text style={Loginstyle.buttonText}>Ya tengo una cuenta</Text>

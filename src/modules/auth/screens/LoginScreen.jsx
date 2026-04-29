@@ -17,6 +17,11 @@ export const loginScreen = ({ goToRegister }) => {
 
     //crearemos el hadle 
     const handleLogin = async () => {
+        // Validar que los campos no estén vacíos
+        if (!email.trim() || !password.trim()) {
+            alert("Por favor completa todos los campos");
+            return;
+        }
         try {
             await login(email, password);
             alert("Inicio de sesion exitoso");
@@ -36,11 +41,11 @@ export const loginScreen = ({ goToRegister }) => {
 
             <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry style={Loginstyle.inputL} />
 
-            <TouchableOpacity style={Loginstyle.buttonL} onPress={handleLogin}>
+            <TouchableOpacity style={Loginstyle.buttonL} onPress={handleLogin} disabled={loading}>
                 <Text style={Loginstyle.buttonText}>{loading ? 'Iniciando sesion' : 'Iniciar Sesion'}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={Loginstyle.buttonL} onPress={goToRegister}>
+            <TouchableOpacity style={Loginstyle.buttonL} onPress={goToRegister} disabled={loading}>
                 <Text style={Loginstyle.buttonText}>No tengo una cuenta</Text>
             </TouchableOpacity>
         </View>
