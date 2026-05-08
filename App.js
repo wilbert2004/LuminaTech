@@ -11,21 +11,32 @@ import { useState } from 'react';
 //importanmos nuestro home 
 import { HomeScreen } from './src/modules/home/screen/HomeScreen';
 
-export const MainApp = () => {
+//importamos los navogation
+import AppNavigator from './src/navigation/AppNavigator';
+
+//naviagtion containe
+import { NavigationContainer } from '@react-navigation/native';
+
+const MainApp = () => {
   const { user, loading } = useContext(AuthContext);
   const [screen, setScreen] = useState('login');
 
-  if (loading) return null; // o splash screen
+  if (loading) return null;
 
-  if (user) return <HomeScreen />;
+  if (user) {
+    return (
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    );
+  }
 
   return screen === 'login' ? (
     <LoginScreen goToRegister={() => setScreen('register')} />
   ) : (
     <RegisterScreen goToLogin={() => setScreen('login')} />
   );
-
-}
+};
 
 
 export default function App() {
