@@ -1,6 +1,7 @@
 //importamos supabse
 import { supabase } from '../../../lib/supebase'
-
+//importamos la funcion para guardar el dispositivo localmente
+import { saveDeviceLocal } from '../../../database/deviceLocalService';
 //creamos una funcion para obtener el resumen de los dispositivos, sensores y luces encendidas
 export const getResumenDispositivos = async () => {
     const { data, error } = await supabase
@@ -8,7 +9,10 @@ export const getResumenDispositivos = async () => {
         .select('*');
 
     if (error) throw error;
-    //devolvemos los datos 
+    //guardamos los dispositivos localmente
+    for (const device of data) {
+        await saveDeviceLocal(device);
+    }
     return data;
 }
 

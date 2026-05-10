@@ -16,6 +16,10 @@ import AppNavigator from './src/navigation/AppNavigator';
 
 //naviagtion containe
 import { NavigationContainer } from '@react-navigation/native';
+//conexion de sqlite 
+import { initDatabase } from './src/database/sqlite';
+//conexion de usesefect para inicializar la base de datos
+import { useEffect } from 'react';
 
 const MainApp = () => {
   const { user, loading } = useContext(AuthContext);
@@ -39,7 +43,13 @@ const MainApp = () => {
 };
 
 
+
+
 export default function App() {
+  //inicializamos la base de datos al iniciar la app
+  useEffect(() => {
+    initDatabase();
+  }, []);
   return (
     <AuthProvidrer>
       <MainApp />
