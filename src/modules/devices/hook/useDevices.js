@@ -6,6 +6,8 @@ import { getResumenDispositivos } from '../service/devicesService';
 import { actualizarEstadoDispositivo } from '../service/devicesService';
 //importamos supabase para crear un canal de suscripcion a cambios en la tabla de dispositivos
 import { supabase } from '../../../lib/supebase';
+//importamos la base dqlite para mostrar dispositvos ofline 
+import { getDevicesLocal } from '../../../database/deviceLocalService';
 
 //creamos una funcion para manejar la logica de la pantalla de dispositivos
 export const UseDevices = () => {
@@ -38,7 +40,9 @@ export const UseDevices = () => {
             setDispositivos(data);
 
         } catch (error) {
-            console.log(error.message)
+            console.log("usaremos sql sin internet para obtener los dispositivos");
+            const localData = await getDevicesLocal();
+            setDispositivos(localData);
         } finally {
             setLoading(false);
         }
