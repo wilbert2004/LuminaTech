@@ -41,38 +41,34 @@ export const HomeScreen = () => {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: styles.container.backgroundColor }}>
+        <View>
             <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center', paddingBottom: 120 }}>
-                <View style={styles.container}>
-                    <Text style={styles.title}>Bienvenido a tu Home : {nombre}</Text>
+                <View >
+                    <Text >Bienvenido a tu Home : {nombre}</Text>
 
-                    <View style={styles.emailContainer}>
-                        <Text style={styles.emailText}>{user.email}</Text>
-                    </View>
-
-                    <TouchableOpacity style={styles.logoutButton} onPress={logout}>
-                        <Text style={styles.logoutText}>Cerrar sesión</Text>
+                    <TouchableOpacity onPress={logout}>
+                        <Text >Cerrar sesión</Text>
                     </TouchableOpacity>
 
-                    <Text style={styles.resumen}>Resumen</Text>
+                    <Text >Resumen</Text>
 
-                    <View style={styles.resumenCard}>
-                        <Text style={styles.resumenLabel}>Dispositivos</Text>
-                        <Text style={styles.resumenNumber}>{resumen.dispositivos}</Text>
+                    <View >
+                        <Text >Dispositivos</Text>
+                        <Text >{resumen.dispositivos}</Text>
                     </View>
 
-                    <View style={styles.resumenCard}>
-                        <Text style={styles.resumenLabel}>Sensores</Text>
-                        <Text style={styles.resumenNumber}>{resumen.sensores}</Text>
+                    <View >
+                        <Text >Sensores</Text>
+                        <Text >{resumen.sensores}</Text>
                     </View>
 
-                    <View style={styles.resumenCard}>
-                        <Text style={styles.resumenLabel}>Activos</Text>
-                        <Text style={styles.resumenNumber}>{resumen.activos}</Text>
+                    <View >
+                        <Text >Activos</Text>
+                        <Text >{resumen.activos}</Text>
                     </View>
 
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     )
 }

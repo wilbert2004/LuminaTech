@@ -21,6 +21,14 @@ import { initDatabase } from './src/database/sqlite';
 //conexion de usesefect para inicializar la base de datos
 import { useEffect } from 'react';
 
+//importar los LogBox para depurar la base de datos
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'onPressIn',
+  'onPressOut',
+  'TouchableMixin',
+]);
 const MainApp = () => {
   const { user, loading } = useContext(AuthContext);
   const [screen, setScreen] = useState('login');

@@ -3,9 +3,12 @@ import { useAuth, } from '../hooks/useAuth'
 //importamos los usestate para manejar el estado de los inputs
 import { useState } from 'react'
 //coomponente de pantalla de login
-import { Text, View, TextInput, TouchableOpacity } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native'
 //importamos el style de nuestro login
-import { Loginstyle } from '../styles/Loginstyle';
+import { loginStyle } from '../styles/Loginstyle';
+
+//importaremos el logo de nuestra app
+import logo from '../../../assets/logo1.png';
 
 export const loginScreen = ({ goToRegister }) => {
     //importamos los estadi 
@@ -34,20 +37,28 @@ export const loginScreen = ({ goToRegister }) => {
 
     //agregamos los ui de cada componenten
     return (
-        <View style={Loginstyle.container}>
-            <Text style={Loginstyle.texto}>Bienvenido a tu login</Text>
-            <Text><br></br></Text>
-            <TextInput placeholder='Email' value={email} onChangeText={setEmail} style={Loginstyle.inputL} />
+        <View style={loginStyle.contenedor} >
 
-            <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry style={Loginstyle.inputL} />
+            <View style={loginStyle.tarjeta} >
+                <Image source={logo} style={loginStyle.logo} />
 
-            <TouchableOpacity style={Loginstyle.buttonL} onPress={handleLogin} disabled={loading}>
-                <Text style={Loginstyle.buttonText}>{loading ? 'Iniciando sesion' : 'Iniciar Sesion'}</Text>
-            </TouchableOpacity>
+                <Text style={loginStyle.titulo} >Bienvenido a tu login</Text>
+                <Text></Text>
 
-            <TouchableOpacity style={Loginstyle.buttonL} onPress={goToRegister} disabled={loading}>
-                <Text style={Loginstyle.buttonText}>No tengo una cuenta</Text>
-            </TouchableOpacity>
+                <Text style={loginStyle.texto} >ingrese su correo electrónico</Text>
+                <TextInput placeholder='Email' value={email} onChangeText={setEmail} style={loginStyle.inputL} />
+
+                <Text style={loginStyle.texto} >ingrese su contraseña</Text>
+                <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry style={loginStyle.inputL} />
+
+                <TouchableOpacity onPress={handleLogin} disabled={loading}>
+                    <Text style={loginStyle.boton}>{loading ? 'Iniciando sesion' : 'Iniciar Sesion'}</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={goToRegister} disabled={loading}>
+                    <Text style={loginStyle.boton}>No tengo una cuenta</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 

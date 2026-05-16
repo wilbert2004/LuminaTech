@@ -1,4 +1,11 @@
 import { registerRootComponent } from 'expo';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+    'onPressIn',
+    'onPressOut',
+    'TouchableMixin',
+]);
 
 import App from './App';
 
