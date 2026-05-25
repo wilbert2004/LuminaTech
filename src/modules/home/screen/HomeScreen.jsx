@@ -6,10 +6,10 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
 //importamos el hook para manejar la logica de la pantalla de home
 import { UseHome } from '../hooks/useHome';
-//importamos el style de la pantalla de home
-import { styles } from '../style/Homestyle';
 //agregamos un opcion de confirmacion 
 import { Alert } from 'react-native';
+//importamos el estilo de la pantalla de home
+import { homestyle } from '../style/Homestyle';
 
 export const HomeScreen = () => {
 
@@ -41,32 +41,36 @@ export const HomeScreen = () => {
     };
 
     return (
-        <View>
+        <View style={homestyle.contenedor}>
             <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center', paddingBottom: 120 }}>
                 <View >
-                    <Text >Bienvenido a tu Home : {nombre}</Text>
+                    <Text></Text>
+                    <View style={homestyle.tarjeta}>
+                        <Text style={homestyle.titulo} >Bienvenido a tu Home : {nombre}</Text>
+                    </View>
 
+                    <Text style={homestyle.titulo} >Resumen</Text>
+
+                    <View style={homestyle.tarjeta}>
+                        <Text style={homestyle.texto} >Dispositivos</Text>
+                        <Text style={homestyle.titulo} >{resumen.dispositivos}</Text>
+                    </View>
+
+                    <View style={homestyle.tarjeta}>
+                        <Text style={homestyle.texto} >Sensores</Text>
+                        <Text style={homestyle.titulo} >{resumen.sensores}</Text>
+                    </View>
+
+                    <View style={homestyle.tarjeta}>
+                        <Text style={homestyle.texto} >Activos</Text>
+                        <Text style={homestyle.titulo} >{resumen.activos}</Text>
+                    </View>
+
+                </View>
+                <View style={homestyle.tarjeta}>
                     <TouchableOpacity onPress={logout}>
-                        <Text >Cerrar sesión</Text>
+                        <Text style={homestyle.titulo} >Cerrar sesión</Text>
                     </TouchableOpacity>
-
-                    <Text >Resumen</Text>
-
-                    <View >
-                        <Text >Dispositivos</Text>
-                        <Text >{resumen.dispositivos}</Text>
-                    </View>
-
-                    <View >
-                        <Text >Sensores</Text>
-                        <Text >{resumen.sensores}</Text>
-                    </View>
-
-                    <View >
-                        <Text >Activos</Text>
-                        <Text >{resumen.activos}</Text>
-                    </View>
-
                 </View>
             </ScrollView>
         </View>
