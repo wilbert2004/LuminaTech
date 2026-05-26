@@ -1,36 +1,107 @@
-//importamo view , Text , Flatlist
-import { View, Text, FlatList } from 'react-native'
-import { ActivityIndicator } from 'react-native';
-//importamos el hook para manejar la logica de la pantalla de dispositivos
+//importamos View, Text, FlatList
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  TouchableOpacity
+} from 'react-native';
+
+//importamos hook
 import { UseDevices } from '../hook/useDevices';
-//importamo devicecar
-import { DeviceCard } from './DeviceCard';
-//importamos nuestro fech de dispositivos
 
+//importamos estilos
+import { Devicesstyle } from '../style/Devicesstyles';
+
+//pantalla principal
 export const DevicesScreen = () => {
-    //importamos dispositovs de hooks
-    const { dispositivos, toggleEstadoDispositivo, loading } = UseDevices();
 
+    //obtenemos dispositivos
+    const {
+        dispositivos,
+        toggleEstadoDispositivo,
+        loading
+    } = UseDevices();
+
+    //loading
     if (loading) {
+
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator size="large" />
-                <Text>Cargando dispositivos...</Text>
+
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: '#121212',
+                }}
+            >
+
+                <ActivityIndicator
+                    size="large"
+                    color="#00FF9C"
+                />
+
+                <Text
+                    style={{
+                        color: '#fff',
+                        marginTop: 15,
+                    }}
+                >
+                    Cargando dispositivos...
+                </Text>
+
             </View>
         );
     }
 
+    //render
     return (
-        <View>
-            <Text>Dispositivos</Text>
 
+        <View style={Devicesstyle.contenedor}>
+
+            {/* titulo */}
+            <Text style={Devicesstyle.titulo}>
+                Dispositivos
+            </Text>
+
+            {/* lista */}
             <FlatList
                 data={dispositivos}
-                keyExtractor={(item) => item.id}
+
+                keyExtractor={(item) => item.id.toString()}
+
                 renderItem={({ item }) => (
-                    <DeviceCard dispositivo={item} toggleEstadoDispositivo={toggleEstadoDispositivo} loading={loading} />
+
+                    <View style={Devicesstyle.tarjeta}>
+
+                        {/* nombre */}
+                        <Text style={Devicesstyle.sensor}>
+                            {item.nombre}
+                        </Text>
+
+                        {/* estado */}
+                        <Text style={Devicesstyle.texto}>
+                            {item.estado ? 'Encendido' : 'Apagado'}
+                        </Text>
+
+                        {/* boton */}
+                        <TouchableOpacity
+                            style={Devicesstyle.boton}
+                            onPress={() => toggleEstadoDispositivo(item.id)}
+                        >
+
+                            <Text style={Devicesstyle.textoBoton}>
+                                {item.estado ? 'APAGAR' : 'ENCENDER'}
+                            </Text>
+
+                        </TouchableOpacity>
+
+                    </View>
+
                 )}
             />
+
         </View>
-    )
-}
+    );
+};
