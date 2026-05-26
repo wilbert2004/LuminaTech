@@ -7,6 +7,7 @@ import { DevicesScreen } from '../modules/devices/Screen/DevicesScreen';
 import { SensorsScreen } from '../modules/sensors/screen/SensorsScreen';
 //usaremos el analytics screen 
 import { AnalyticsScreen } from '../modules/analytics/screen/AnalyticsScreen';
+import { ProfileScreen } from '../modules/perfiles/screen/ProfileScreen';
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
@@ -17,6 +18,7 @@ const AppNavigator = () => {
             <Tab.Screen name="Dispositivos" component={DevicesScreen} />
             <Tab.Screen name="Sensores" component={SensorsScreen} />
             <Tab.Screen name="Historial de Lecturas" component={AnalyticsScreen} />
+            <Tab.Screen name="Perfil" component={ProfileScreen} />
             {/* próximamente */}
             {/* <Tab.Screen name="Dispositivos" component={DevicesScreen} /> */}
             {/* <Tab.Screen name="Sensores" component={SensorsScreen} /> */}

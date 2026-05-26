@@ -10,7 +10,7 @@ import { useState, useEffect, createContext } from 'react'
 export const AuthContext = createContext();
 
 //creamos una funcion para el provedos de nuestro contexto de autenticacion
-export const AuthProvidrer = ({ children }) => {
+export const AuthProvider = ({ children }) => {
 
     //creamos un estado para almacenar el usuario autenticado
     const [user, setUser] = useState(null);
