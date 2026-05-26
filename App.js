@@ -1,7 +1,7 @@
 //importamos nuestro login screen
 import LoginScreen from './src/modules/auth/screens/LoginScreen';
 //auth context
-import { AuthProvidrer, AuthContext } from './src/context/AuthContext';
+import { AuthProvider, AuthContext } from './src/context/AuthContext';
 //implemento el useccontext para manejar el estado de autenticacion
 import { useContext } from 'react';
 //importamos el register screen
@@ -59,9 +59,9 @@ export default function App() {
     initDatabase();
   }, []);
   return (
-    <AuthProvidrer>
+    <AuthProvider>
       <MainApp />
-    </AuthProvidrer>
+    </AuthProvider>
   );
 }
 
