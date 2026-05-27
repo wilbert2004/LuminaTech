@@ -8,6 +8,7 @@ import { useProfile } from '../hook/useProfile';
 import { useContext } from 'react';
 
 import { AuthContext } from '../../../context/AuthContext';
+import { formatearFecha } from '../../../utils/formatearFecha';
 
 export const ProfileScreen = () => {
     const { user, logout } = useContext(AuthContext);
@@ -26,7 +27,7 @@ export const ProfileScreen = () => {
             <Text>Perfil Usuario</Text>
             <Text>Nombre: {perfil?.nombre}</Text>
             <Text>Correo: {user?.email}</Text>
-            <Text>Fecha: {perfil?.created_at}</Text>
+            <Text>Fecha: {formatearFecha(perfil?.created_at)}</Text>
 
             <TouchableOpacity onPress={logout}>
                 <Text>Cerrar sesión</Text>

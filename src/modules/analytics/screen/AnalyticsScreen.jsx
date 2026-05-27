@@ -2,6 +2,7 @@
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 //omportamos los hooks de analytics
 import { useAnalytics } from '../hooks/useAnalytics';
+import { formatearFecha } from '../../../utils/formatearFecha';
 
 //importamos el componente de lecturas 
 import { LecturasChart } from '../components/LecturasChart';
@@ -45,7 +46,7 @@ export const AnalyticsScreen = () => {
                         </Text>
 
                         <Text style={styles.fecha}>
-                            Fecha: {item.fecha}
+                            Fecha: {formatearFecha(item.fecha)}
                         </Text>
                     </View>
                 )}
