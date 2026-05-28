@@ -54,9 +54,24 @@ const MainApp = () => {
 
 
 export default function App() {
-  //inicializamos la base de datos al iniciar la app
   useEffect(() => {
-    initDatabase();
+
+    const iniciarDB = async () => {
+
+      const { Platform } = require('react-native');
+
+      if (Platform.OS !== 'web') {
+
+        const { initDatabase } = require('./src/database/sqlite');
+
+        await initDatabase();
+
+      }
+
+    };
+
+    iniciarDB();
+
   }, []);
   return (
     <AuthProvider>
