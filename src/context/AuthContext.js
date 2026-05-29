@@ -59,8 +59,14 @@ export const AuthProvider = ({ children }) => {
 
     //vericamos el login 
     const logout = async () => {
-        await supabase.auth.signOut();
-        setUser(null);
+        try {
+            await supabase.auth.signOut();
+        } catch (error) {
+            // Aunque Supabase falle, limpiamos el estado local para sacar al usuario de la sesión visual.
+            console.error('Error al cerrar sesión en Supabase:', error);
+        } finally {
+            setUser(null);
+        }
     }
 
     //luego queremos que nos devuelva el valor de cada estad y envolviendo nuestro children 

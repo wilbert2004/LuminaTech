@@ -1,47 +1,43 @@
-//importamos los hooks necesarios
 import { useState, useEffect } from 'react';
-//importamos el servicio de dispositivos
-import { getAcciones, crearAccion } from '../services/actionsService';
+import { obtenerAcciones, crearAccion } from '../services/actionsService';
 
-//crearemos las funciones necesarias para obtener las acciones y crear una accion
-export const useActions = () => {
+export const useAcciones = () => {
     const [acciones, setAcciones] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [cargando, setCargando] = useState(false);
 
-
-    //los useEffect se ejecutaran cada vez que se cargue el componente, en este caso el screen de acciones, para obtener las acciones
     useEffect(() => {
-        fetchAcciones();
+        cargarAcciones();
     }, []);
-    //funcion para obtener las acciones
-    const fetchAcciones = async () => {
-        try {
-            setLoading(true);
-            const data = await getAcciones();
 
-            setAcciones(data);
+    const cargarAcciones = async () => {
+        try {
+            setCargando(true);
+            const datos = await obtenerAcciones();
+            setAcciones(datos ?? []);
+        } catch (error) {
+            console.error('Error al obtener las acciones:', error);
         } finally {
-            setLoading(false);
+            setCargando(false);
         }
     }
 
-    //funcion para crear una accion
-    const encender = async (id) => {
+    const encenderDispositivo = async (id) => {
         await crearAccion(id, 'on', 'manual');
-        fetchAcciones();
+        await cargarAcciones();
     }
 
-    //funcion para apagar una accion
-    const apagar = async (id) => {
+    const apagarDispositivo = async (id) => {
         await crearAccion(id, 'off', 'manual');
-        fetchAcciones();
+        await cargarAcciones();
     }
 
-    //retornamos las acciones, la funcion para encender, apagar y el loading
     return {
         acciones,
-        encender,
-        apagar,
-        loading,
+        cargarAcciones,
+        encenderDispositivo,
+        apagarDispositivo,
+        cargando,
     }
 }
+
+export const useActions = useAcciones;

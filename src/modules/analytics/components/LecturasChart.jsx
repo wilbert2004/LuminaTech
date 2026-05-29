@@ -1,14 +1,9 @@
-//importamos componentens view 
-import { View, Text, StyleSheet } from 'react-native';
-
-//importamos el componente de chart
+import { View } from 'react-native';
 import { LineChart } from 'react-native-gifted-charts';
 
-//crearemos el componente de lecturas chart
-export const LecturasChart = ({ data = [] }) => {
-
-    //prepararemos los datos para el chart
-    const chartData = data.map((lectura, index) => ({
+export const GraficaLecturas = ({ data = [] }) => {
+    // Preparamos la serie para la gráfica desde el valor de cada lectura.
+    const datosGrafica = data.map((lectura, index) => ({
         value: Number(lectura.valor),
         label: `${index + 1}`
     }));
@@ -16,13 +11,13 @@ export const LecturasChart = ({ data = [] }) => {
     return (
         <View>
             <LineChart
-                data={chartData}
-                spacing={40}
+                data={datosGrafica}
+                spacing={32}
                 thickness={3}
                 hideDataPoints={false}
-                color="green"
-                startFillColor="rgba(0,255,0,0.3)"
-                endFillColor="rgba(0,255,0,0.01)"
+                color="#00FF9C"
+                startFillColor="rgba(0,255,156,0.3)"
+                endFillColor="rgba(0,255,156,0.01)"
                 initialSpacing={10}
                 noOfSections={5}
                 animateOnDataChange
@@ -31,3 +26,6 @@ export const LecturasChart = ({ data = [] }) => {
         </View>
     )
 }
+
+export const graficaLecturas = GraficaLecturas;
+export const LecturasChart = GraficaLecturas;

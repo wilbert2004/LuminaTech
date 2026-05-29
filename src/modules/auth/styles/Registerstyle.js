@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const loginStyle = StyleSheet.create({
+export const registerStyle = StyleSheet.create({
     contenedor: {
         flex: 1,
         backgroundColor: '#07111E',
@@ -9,21 +9,21 @@ export const loginStyle = StyleSheet.create({
     },
     glowTop: {
         position: 'absolute',
-        top: -70,
-        right: -40,
+        top: -80,
+        left: -50,
         width: 220,
         height: 220,
         borderRadius: 110,
-        backgroundColor: 'rgba(0, 255, 156, 0.12)',
+        backgroundColor: 'rgba(73, 140, 255, 0.14)',
     },
     glowBottom: {
         position: 'absolute',
-        bottom: -80,
-        left: -60,
-        width: 240,
-        height: 240,
-        borderRadius: 120,
-        backgroundColor: 'rgba(73, 140, 255, 0.12)',
+        bottom: -90,
+        right: -70,
+        width: 250,
+        height: 250,
+        borderRadius: 125,
+        backgroundColor: 'rgba(0, 255, 156, 0.10)',
     },
     tarjeta: {
         width: '100%',
@@ -46,19 +46,19 @@ export const loginStyle = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 6,
         borderRadius: 999,
-        backgroundColor: 'rgba(0, 255, 156, 0.12)',
+        backgroundColor: 'rgba(73, 140, 255, 0.14)',
         marginBottom: 16,
     },
     badgeText: {
-        color: '#7BFFD1',
+        color: '#A8CBFF',
         fontSize: 12,
         fontWeight: '700',
         letterSpacing: 0.8,
         textTransform: 'uppercase',
     },
     logo: {
-        width: 96,
-        height: 96,
+        width: 92,
+        height: 92,
         marginBottom: 18,
         alignSelf: 'center',
         resizeMode: 'contain',

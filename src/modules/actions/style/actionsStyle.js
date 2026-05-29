@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const estilosHistorial = StyleSheet.create({
+export const estilosAcciones = StyleSheet.create({
     contenedor: {
         flex: 1,
         backgroundColor: '#06101C',
@@ -104,7 +104,7 @@ export const estilosHistorial = StyleSheet.create({
         fontSize: 12,
         fontWeight: '700',
     },
-    tarjetaGrafica: {
+    tarjetaControl: {
         borderRadius: 24,
         padding: 18,
         marginBottom: 18,
@@ -112,41 +112,66 @@ export const estilosHistorial = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'rgba(73, 140, 255, 0.16)',
     },
-    tituloGrafica: {
-        color: '#EDF4FF',
-        fontSize: 16,
-        fontWeight: '800',
-        marginBottom: 12,
+    filaBotones: {
+        flexDirection: 'row',
+        gap: 12,
+        marginTop: 14,
     },
-    tarjetaLectura: {
-        width: '100%',
+    boton: {
+        flex: 1,
+        minHeight: 52,
+        borderRadius: 16,
+        paddingHorizontal: 16,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    botonEncender: {
+        backgroundColor: '#00FF9C',
+    },
+    botonApagar: {
+        backgroundColor: 'rgba(127, 179, 255, 0.16)',
+        borderWidth: 1,
+        borderColor: 'rgba(127, 179, 255, 0.28)',
+    },
+    iconoBoton: {
+        marginRight: 8,
+    },
+    textoBotonEncender: {
+        color: '#06131F',
+        fontSize: 15,
+        fontWeight: '900',
+    },
+    textoBotonApagar: {
+        color: '#EDF4FF',
+        fontSize: 15,
+        fontWeight: '900',
+    },
+    tarjetaLista: {
         borderRadius: 24,
         padding: 18,
-        marginBottom: 14,
         backgroundColor: 'rgba(10, 19, 35, 0.94)',
         borderWidth: 1,
         borderColor: 'rgba(255, 255, 255, 0.08)',
-        shadowColor: '#000',
-        shadowOpacity: 0.16,
-        shadowRadius: 10,
-        shadowOffset: { width: 0, height: 8 },
-        elevation: 5,
     },
-    sensores: {
-        color: '#00FF9C',
-        fontSize: 17,
+    tarjetaAccion: {
+        borderRadius: 18,
+        padding: 16,
+        marginBottom: 12,
+        backgroundColor: 'rgba(255, 255, 255, 0.03)',
+        borderWidth: 1,
+        borderColor: 'rgba(255, 255, 255, 0.06)',
+    },
+    tituloAccion: {
+        color: '#FFFFFF',
+        fontSize: 16,
         fontWeight: '800',
-        marginBottom: 4,
+        marginBottom: 6,
     },
     texto: {
         color: '#DDE7F6',
         fontSize: 13,
-        marginTop: 5,
-    },
-    fecha: {
-        color: '#9CA3AF',
-        marginTop: 10,
-        fontSize: 12,
+        marginTop: 4,
     },
     estadoVacio: {
         color: '#A9B9D3',
@@ -154,6 +179,10 @@ export const estilosHistorial = StyleSheet.create({
         textAlign: 'center',
         marginTop: 18,
     },
+    loadingText: {
+        color: '#A9B9D3',
+        fontSize: 14,
+        textAlign: 'center',
+        marginTop: 20,
+    },
 });
-
-export const styles = estilosHistorial;
