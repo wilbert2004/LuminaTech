@@ -1,32 +1,28 @@
-//importa estado sy useffect
 import { useState, useEffect } from 'react';
-//importamos nuestro servicio de analytics
-import { getHistorialLecturas } from '../services/analyticsService';
+import { obtenerHistorialLecturas } from '../services/analyticsService';
 
-export const useAnalytics = () => {
-    //crearemos estado yo de carga
-    const [analytics, setAnalytics] = useState([]);
-    const [loading, setLoading] = useState(false);
+export const useHistorialLecturas = () => {
+    const [historialLecturas, setHistorialLecturas] = useState([]);
+    const [cargando, setCargando] = useState(false);
 
-    //useeffect para jalar los analytics al iniciar el componente
     useEffect(() => {
-        //jalamos los analytics al iniciar el componente
-        fetchAnalytics();
+        cargarHistorial();
     }, [])
 
-    //crearemos una funcion para jalar los analytics de un dispositivo
-    const fetchAnalytics = async () => {
+    const cargarHistorial = async () => {
         try {
-            setLoading(true);
-            const data = await getHistorialLecturas();
-            setAnalytics(data ?? []);
+            setCargando(true);
+            const datos = await obtenerHistorialLecturas();
+            setHistorialLecturas(datos ?? []);
         } catch (error) {
-            console.error("Error al obtener los analytics:", error);
+            console.error('Error al obtener el historial de lecturas:', error);
         } finally {
-            setLoading(false);
+            setCargando(false);
         }
 
     }
-    return { analytics, loading, fetchAnalytics };
+    return { historialLecturas, cargando, cargarHistorial };
 
 }
+
+export const useAnalytics = useHistorialLecturas;

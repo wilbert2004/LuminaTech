@@ -1,16 +1,16 @@
-//lib de  supabase para jalar datos de la base de datos
 import { supabase } from '../../../lib/supebase'
 
-//funcion asincrona de obtener historial de lecturas de un sensor
-export const getHistorialLecturas = async () => {
+export const obtenerHistorialLecturas = async () => {
     const { data, error } = await supabase
         .from('lecturas')
-        .select('*,sensores (tipo , unidad)') //jalar el tipo y unidad del sensor relacionado
-        .order('fecha', { ascending: false }) //ordenar por fecha descendente
+        .select('*,sensores (tipo , unidad)')
+        .order('fecha', { ascending: false })
 
     if (error) {
-        throw new Error("Error al obtener el historial de lecturas: " + error.message);
+        throw new Error('Error al obtener el historial de lecturas: ' + error.message);
     }
 
     return data;
 }
+
+export const getHistorialLecturas = obtenerHistorialLecturas;

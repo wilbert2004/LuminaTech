@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const estilosHistorial = StyleSheet.create({
+export const estilosPerfil = StyleSheet.create({
     contenedor: {
         flex: 1,
         backgroundColor: '#06101C',
@@ -79,32 +79,7 @@ export const estilosHistorial = StyleSheet.create({
         fontSize: 15,
         lineHeight: 22,
     },
-    filaDeEstado: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        marginTop: 16,
-    },
-    chip: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: 12,
-        paddingVertical: 8,
-        borderRadius: 999,
-        backgroundColor: 'rgba(255, 255, 255, 0.05)',
-        borderWidth: 1,
-        borderColor: 'rgba(255, 255, 255, 0.08)',
-        marginRight: 10,
-        marginBottom: 10,
-    },
-    iconoChip: {
-        marginRight: 6,
-    },
-    textoChip: {
-        color: '#DDE7F6',
-        fontSize: 12,
-        fontWeight: '700',
-    },
-    tarjetaGrafica: {
+    tarjetaDatos: {
         borderRadius: 24,
         padding: 18,
         marginBottom: 18,
@@ -112,41 +87,46 @@ export const estilosHistorial = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'rgba(73, 140, 255, 0.16)',
     },
-    tituloGrafica: {
-        color: '#EDF4FF',
+    filaDato: {
+        paddingVertical: 12,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(255, 255, 255, 0.06)',
+    },
+    etiquetaDato: {
+        color: '#9AA8C4',
+        fontSize: 12,
+        fontWeight: '700',
+        marginBottom: 4,
+        textTransform: 'uppercase',
+        letterSpacing: 0.5,
+    },
+    valorDato: {
+        color: '#FFFFFF',
         fontSize: 16,
         fontWeight: '800',
-        marginBottom: 12,
     },
-    tarjetaLectura: {
-        width: '100%',
-        borderRadius: 24,
-        padding: 18,
-        marginBottom: 14,
-        backgroundColor: 'rgba(10, 19, 35, 0.94)',
-        borderWidth: 1,
-        borderColor: 'rgba(255, 255, 255, 0.08)',
-        shadowColor: '#000',
-        shadowOpacity: 0.16,
-        shadowRadius: 10,
-        shadowOffset: { width: 0, height: 8 },
-        elevation: 5,
+    botonCerrarSesion: {
+        minHeight: 52,
+        borderRadius: 16,
+        paddingHorizontal: 16,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#00FF9C',
     },
-    sensores: {
-        color: '#00FF9C',
-        fontSize: 17,
-        fontWeight: '800',
-        marginBottom: 4,
+    iconoBoton: {
+        marginRight: 8,
     },
-    texto: {
-        color: '#DDE7F6',
-        fontSize: 13,
-        marginTop: 5,
+    textoBoton: {
+        color: '#06131F',
+        fontSize: 15,
+        fontWeight: '900',
     },
-    fecha: {
-        color: '#9CA3AF',
-        marginTop: 10,
-        fontSize: 12,
+    loadingText: {
+        color: '#A9B9D3',
+        fontSize: 14,
+        textAlign: 'center',
+        marginTop: 20,
     },
     estadoVacio: {
         color: '#A9B9D3',
@@ -156,4 +136,4 @@ export const estilosHistorial = StyleSheet.create({
     },
 });
 
-export const styles = estilosHistorial;
+export const styles = estilosPerfil;

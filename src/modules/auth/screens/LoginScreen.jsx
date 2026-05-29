@@ -4,13 +4,14 @@ import { useAuth, } from '../hooks/useAuth'
 import { useState } from 'react'
 //coomponente de pantalla de login
 import { Text, View, TextInput, TouchableOpacity, Image } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient';
 //importamos el style de nuestro login
 import { loginStyle } from '../styles/Loginstyle';
 
 //importaremos el logo de nuestra app
 import logo from '../../../assets/logo1.png';
 
-export const loginScreen = ({ goToRegister }) => {
+export const LoginScreen = ({ goToRegister }) => {
     //importamos los estadi 
     const { login, loading } = useAuth();
 
@@ -37,33 +38,60 @@ export const loginScreen = ({ goToRegister }) => {
 
     //agregamos los ui de cada componenten
     return (
-        <View style={loginStyle.contenedor} >
+        <LinearGradient
+            colors={['#07111E', '#0B1A2C', '#08111E']}
+            style={loginStyle.contenedor}
+        >
+            <View style={loginStyle.glowTop} />
+            <View style={loginStyle.glowBottom} />
 
-            <View style={loginStyle.tarjeta} >
+            <View style={loginStyle.tarjeta}>
+                <View style={loginStyle.badge}>
+                    <Text style={loginStyle.badgeText}>IoT Lighting Control</Text>
+                </View>
+
                 <Image source={logo} style={loginStyle.logo} />
 
-                <Text style={loginStyle.titulo} >Bienvenido a tu login</Text>
-                <Text></Text>
+                <Text style={loginStyle.titulo}>Controla tu iluminación</Text>
+                <Text style={loginStyle.subtitulo}>Accede al panel inteligente para gestionar tus dispositivos y escenas.</Text>
 
-                <Text style={loginStyle.texto} >ingrese su correo electrónico</Text>
-                <TextInput placeholder='Email' value={email} onChangeText={setEmail} style={loginStyle.inputL} />
+                <Text style={loginStyle.texto}>Correo electrónico</Text>
+                <TextInput
+                    placeholder='Email'
+                    placeholderTextColor='#6F7F9B'
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    keyboardType='email-address'
+                    value={email}
+                    onChangeText={setEmail}
+                    style={loginStyle.inputL}
+                />
 
-                <Text style={loginStyle.texto} >ingrese su contraseña</Text>
-                <TextInput placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry style={loginStyle.inputL} />
+                <Text style={loginStyle.texto}>Contraseña</Text>
+                <TextInput
+                    placeholder='Password'
+                    placeholderTextColor='#6F7F9B'
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry
+                    style={loginStyle.inputL}
+                />
 
-                <TouchableOpacity onPress={handleLogin} disabled={loading}>
-                    <Text style={loginStyle.boton}>{loading ? 'Iniciando sesion' : 'Iniciar Sesion'}</Text>
+                <TouchableOpacity style={loginStyle.boton} onPress={handleLogin} disabled={loading}>
+                    <Text style={loginStyle.botonTexto}>{loading ? 'Iniciando sesión...' : 'Iniciar sesión'}</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={goToRegister} disabled={loading}>
-                    <Text style={loginStyle.boton}>No tengo una cuenta</Text>
+                <TouchableOpacity style={loginStyle.botonSecundario} onPress={goToRegister} disabled={loading}>
+                    <Text style={loginStyle.botonTextoSecundario}>No tengo una cuenta</Text>
                 </TouchableOpacity>
+
+                <Text style={loginStyle.footerText}>Diseñado para un sistema de iluminación automática con enfoque IoT.</Text>
             </View>
-        </View>
+        </LinearGradient>
     )
 
 }
 
 
 //exportamos la funcion de nuestro componente de login
-export default loginScreen;
+export default LoginScreen;

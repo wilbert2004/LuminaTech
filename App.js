@@ -3,7 +3,7 @@ import LoginScreen from './src/modules/auth/screens/LoginScreen';
 //auth context
 import { AuthProvider, AuthContext } from './src/context/AuthContext';
 //implemento el useccontext para manejar el estado de autenticacion
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 //importamos el register screen
 import { RegisterScreen } from './src/modules/auth/screens/RegisterScreen';
 //definimos usestate para manejar el estado de la pantalla
@@ -18,8 +18,6 @@ import AppNavigator from './src/navigation/AppNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 //conexion de sqlite 
 import { initDatabase } from './src/database/sqlite';
-//conexion de usesefect para inicializar la base de datos
-import { useEffect } from 'react';
 
 //importar los LogBox para depurar la base de datos
 import { LogBox } from 'react-native';
@@ -32,6 +30,13 @@ LogBox.ignoreLogs([
 const MainApp = () => {
   const { user, loading } = useContext(AuthContext);
   const [screen, setScreen] = useState('login');
+
+  // Cuando ya no hay usuario autenticado, forzamos el regreso a la pantalla de login.
+  useEffect(() => {
+    if (!user) {
+      setScreen('login');
+    }
+  }, [user]);
 
   if (loading) return null;
 
