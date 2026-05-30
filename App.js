@@ -22,13 +22,18 @@ import { initDatabase } from './src/database/sqlite';
 //importar los LogBox para depurar la base de datos
 import { LogBox } from 'react-native';
 
+//importamos el pending screen
+import { PendingScreen } from './src/modules/pending/screen/PendingScreen';
+//importar el root navigator para manejar la navegacion entre pantallas
+import RootNavigator from './src/navigation/RootNavigator';
+
 LogBox.ignoreLogs([
   'onPressIn',
   'onPressOut',
   'TouchableMixin',
 ]);
 const MainApp = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading, rol, estado } = useContext(AuthContext);
   const [screen, setScreen] = useState('login');
 
   // Cuando ya no hay usuario autenticado, forzamos el regreso a la pantalla de login.
@@ -40,10 +45,16 @@ const MainApp = () => {
 
   if (loading) return null;
 
+  if (user && estado === 'pendiente') {
+    return (
+      <PendingScreen />
+    )
+  }
+
   if (user) {
     return (
       <NavigationContainer>
-        <AppNavigator />
+        <RootNavigator />
       </NavigationContainer>
     );
   }

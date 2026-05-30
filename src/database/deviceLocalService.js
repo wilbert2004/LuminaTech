@@ -4,20 +4,21 @@ import db from './sqlite';
 import { Platform } from 'react-native';
 
 //crearemos una funciona asincrona para agregar un dispositivo a la base de datos
-export const saveDeviceLocal = async (device) => {
+export const saveDeviceLocal = async (device, perfilId) => {
     if (Platform.OS === 'web') return;
     try {
         await db.runAsync(
             `
       INSERT OR REPLACE INTO dispositivos
-      (id, nombre, ubicacion, estado)
-      VALUES (?, ?, ?, ?)
+      (id, nombre, ubicacion, estado, perfil_id)
+      VALUES (?, ?, ?, ?, ?)
       `,
             [
                 device.id,
                 device.nombre,
                 device.ubicacion,
-                device.estado ? 1 : 0
+                device.estado ? 1 : 0,
+                perfilId
             ]
         );
 
@@ -28,9 +29,12 @@ export const saveDeviceLocal = async (device) => {
 }
 
 //USAREMOS UNA FUNCION PARA OBTENER LOS DISPOSITIVOS GUARDADOS LOCALMENTE, ASYNCRONA
-export const getDevicesLocal = async () => {
+export const getDevicesLocal = async (perfilId) => {
     try {
-        const result = await db.getAllAsync(`SELECT * FROM dispositivos`);
+        const result = await db.getAllAsync(
+            `SELECT * FROM dispositivos WHERE perfil_id = ?`,
+            [perfilId]
+        );
         console.log("dispositivos obtenidos localmente");
         return result;
     } catch (error) {

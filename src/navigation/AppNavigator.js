@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //impormamos nuestro home screen
 import { HomeScreen } from '../modules/home/screen/HomeScreen';
 //imporamos nuestro devices screen
-//import { DevicesScreen } from '../modules/devices/Screen/DevicesScreen';
+import { DevicesScreen } from '../modules/devices/Screen/DevicesScreen';
 //importamos nuestro sensors screen
 import { SensorsScreen } from '../modules/sensors/screen/SensorsScreen';
 //usaremos el analytics screen 
@@ -51,10 +51,10 @@ const AppNavigator = () => {
             <Tab.Screen name="Sensores" component={SensorsScreen} />
             <Tab.Screen name="Historial de Lecturas" component={AnalyticsScreen} />
             <Tab.Screen name="Acciones" component={ActionsScreen} />
+            <Tab.Screen name="Aulas" component={DevicesScreen} />
             <Tab.Screen name="Perfil" component={ProfileScreen} />
 
             {/* próximamente */}
-            {/* <Tab.Screen name="Dispositivos" component={DevicesScreen} /> */}
             {/* <Tab.Screen name="Sensores" component={SensorsScreen} /> */}
 
         </Tab.Navigator>

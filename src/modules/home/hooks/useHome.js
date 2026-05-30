@@ -41,7 +41,7 @@ export const UseHome = (user) => {
         //obtenemos el resumen de dispositivos
         const fetchResumen = async () => {
             try {
-                const data = await getResumenDispositivos();
+                const data = await getResumenDispositivos(user.id);
                 setResumen(data);
             } catch (error) {
                 console.error('Error al obtener el resumen de dispositivos:', error);
