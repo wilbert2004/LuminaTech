@@ -16,6 +16,32 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    //implementaremos un rbac
+    const [rol, setRol] = useState(null);
+    const [perfil, setPerfil] = useState(null);
+    const [estado, setEstado] = useState(null);
+
+
+    //crearemos  una funcion obtener el perfil del usuario para verificar su rol y estado
+    const obtenerPerfil = async (userId) => {
+        const { data, error } = await supabase
+            .from('perfiles')
+            .select("*")
+            .eq('id', userId)
+            .single();
+
+        // Si hay un error, lo lanzamos para manejarlo en el login.
+        if (error) {
+            console.error('Error al obtener el perfil del usuario:', error);
+            return null;
+        }
+
+        setPerfil(data);
+        setRol(data.rol);
+        setEstado(data.estado);
+        return data;
+    }
+
     //creamos un efecto para verificar si el usuario esta autenticado al cargar la aplicacion
     useEffect(() => {
         const loadSession = async () => {
@@ -26,6 +52,7 @@ export const AuthProvider = ({ children }) => {
                 setUser(null);
             } else {
                 setUser(data.user);
+                await obtenerPerfil(data.user.id);
             }
 
             setLoading(false);
@@ -38,6 +65,14 @@ export const AuthProvider = ({ children }) => {
         //creamos un listener para verificar si el usuario cambia su estado de autenticacion, para esto usaremos la funcion de supabase para escuchar los cambios 
         const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
             setUser(session?.user ?? null);
+
+            if (session?.user) {
+                obtenerPerfil(session.user.id);
+            } else {
+                setRol(null);
+                setEstado(null);
+                setPerfil(null);
+            }
         });
 
         //limpiamos el listener cuando el componente se desmonte
@@ -69,10 +104,11 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    //luego queremos que nos devuelva el valor de cada estad y envolviendo nuestro children 
-    return (<AuthContext.Provider value={{ user, login, logout, loading }}>
-        {children}
-    </AuthContext.Provider>
+    //luego queremos que nos devuelva el valor de cada estado y envolviendo nuestro children 
+    return (
+        <AuthContext.Provider value={{ user, login, logout, loading, rol, estado, perfil }}>
+            {children}
+        </AuthContext.Provider>
     );
 
 

@@ -8,10 +8,15 @@ import { actualizarEstadoDispositivo } from '../service/devicesService';
 import { supabase } from '../../../lib/supebase';
 //importamos la base dqlite para mostrar dispositvos ofline 
 import { getDevicesLocal } from '../../../database/deviceLocalService';
+//use context para obtener el usuario autenticado
+import { useContext } from 'react';
+//auth context para obtener el usuario autenticado
+import { AuthContext } from '../../../context/AuthContext';
 
 //creamos una funcion para manejar la logica de la pantalla de dispositivos
 export const UseDevices = () => {
     const [dispositivos, setDispositivos] = useState([]);
+    const { user } = useContext(AuthContext);
 
     const [loading, setLoading] = useState(false);
 
@@ -30,18 +35,20 @@ export const UseDevices = () => {
         return () => {
             supabase.removeChannel(channel);
         }
-    }, []);
+    }, [user?.id]);
 
     //crearemos l funcion de useeffect para obtener los dispositivos de la base de datos
     const fetchDispositivos = async () => {
+        //proteccion
+        if (!user) return;
         try {
             setLoading(true);
-            const data = await getResumenDispositivos();
+            const data = await getResumenDispositivos(user.id);
             setDispositivos(data);
 
         } catch (error) {
             console.log("usaremos sql sin internet para obtener los dispositivos");
-            const localData = await getDevicesLocal();
+            const localData = await getDevicesLocal(user.id);
             setDispositivos(localData);
         } finally {
             setLoading(false);

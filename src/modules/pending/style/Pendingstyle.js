@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const estilosPerfil = StyleSheet.create({
+export const estilosPending = StyleSheet.create({
     contenedor: {
         flex: 1,
         backgroundColor: '#06101C',
@@ -30,14 +30,15 @@ export const estilosPerfil = StyleSheet.create({
         paddingBottom: 28,
     },
     cuerpo: {
+        flex: 1,
         width: '100%',
         maxWidth: 980,
         alignSelf: 'center',
+        justifyContent: 'center',
     },
     tarjetaPrincipal: {
         borderRadius: 30,
         padding: 22,
-        marginBottom: 18,
         backgroundColor: 'rgba(10, 19, 35, 0.96)',
         borderWidth: 1,
         borderColor: 'rgba(132, 196, 255, 0.12)',
@@ -54,14 +55,14 @@ export const estilosPerfil = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 7,
         borderRadius: 999,
-        backgroundColor: 'rgba(0, 255, 156, 0.10)',
+        backgroundColor: 'rgba(255, 193, 7, 0.10)',
         marginBottom: 14,
     },
     iconoEtiqueta: {
         marginRight: 6,
     },
     textoEtiqueta: {
-        color: '#7BFFD1',
+        color: '#FFD76A',
         fontSize: 12,
         fontWeight: '800',
         letterSpacing: 0.7,
@@ -79,64 +80,34 @@ export const estilosPerfil = StyleSheet.create({
         fontSize: 15,
         lineHeight: 22,
     },
-    tarjetaDatos: {
+    alerta: {
+        marginTop: 18,
         borderRadius: 24,
         padding: 18,
-        marginBottom: 18,
-        backgroundColor: 'rgba(10, 19, 35, 0.96)',
+        backgroundColor: 'rgba(73, 140, 255, 0.10)',
         borderWidth: 1,
         borderColor: 'rgba(73, 140, 255, 0.16)',
     },
-    filaDato: {
-        paddingVertical: 12,
-        borderBottomWidth: 1,
-        borderBottomColor: 'rgba(255, 255, 255, 0.06)',
-    },
-    etiquetaDato: {
-        color: '#9AA8C4',
-        fontSize: 12,
-        fontWeight: '700',
-        marginBottom: 4,
-        textTransform: 'uppercase',
-        letterSpacing: 0.5,
-    },
-    valorDato: {
-        color: '#FFFFFF',
+    alertaTitulo: {
+        color: '#DCE7F7',
         fontSize: 16,
         fontWeight: '800',
+        marginBottom: 6,
+    },
+    alertaTexto: {
+        color: '#A9B9D3',
+        fontSize: 14,
+        lineHeight: 20,
     },
     botonCerrarSesion: {
         minHeight: 52,
         borderRadius: 16,
         paddingHorizontal: 16,
+        marginTop: 18,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#00FF9C',
-    },
-    botonAdministrarUsuarios: {
-        minHeight: 52,
-        borderRadius: 16,
-        paddingHorizontal: 16,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(10, 19, 35, 0.96)',
-        borderWidth: 1,
-        borderColor: 'rgba(0, 255, 156, 0.32)',
-        marginBottom: 12,
-    },
-    botonAdmin: {
-        minHeight: 52,
-        borderRadius: 16,
-        paddingHorizontal: 16,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(10, 19, 35, 0.96)',
-        borderWidth: 1,
-        borderColor: 'rgba(127, 179, 255, 0.22)',
-        marginBottom: 12,
     },
     iconoBoton: {
         marginRight: 8,
@@ -146,35 +117,13 @@ export const estilosPerfil = StyleSheet.create({
         fontSize: 15,
         fontWeight: '900',
     },
-    textoBotonAdministrar: {
-        color: '#7BFFD1',
-        fontSize: 15,
-        fontWeight: '900',
-    },
-    textoBotonAdmin: {
-        color: '#DDE7F6',
-        fontSize: 15,
-        fontWeight: '900',
-        marginLeft: 8,
-    },
-    iconoBotonAdministrar: {
-        marginRight: 8,
-    },
-    iconoBotonAdmin: {
-        marginRight: 0,
-    },
-    loadingText: {
-        color: '#A9B9D3',
-        fontSize: 14,
+    nota: {
+        color: '#73829B',
+        fontSize: 12,
         textAlign: 'center',
-        marginTop: 20,
-    },
-    estadoVacio: {
-        color: '#A9B9D3',
-        fontSize: 14,
-        textAlign: 'center',
-        marginTop: 18,
+        marginTop: 14,
+        lineHeight: 18,
     },
 });
 
-export const styles = estilosPerfil;
+export const styles = estilosPending;

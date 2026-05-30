@@ -19,9 +19,16 @@ export const initDatabase = async () => {
                 id TEXT PRIMARY KEY NOT NULL,
                 nombre TEXT,
                 ubicacion TEXT,
-                estado INTEGER
+                estado INTEGER,
+                perfil_id TEXT
             );
         `);
+
+        try {
+            await db.execAsync(`ALTER TABLE dispositivos ADD COLUMN perfil_id TEXT;`);
+        } catch (error) {
+            // La columna ya puede existir en instalaciones previas.
+        }
     } catch (error) {
         console.error("Error al crear la base de datos:", error);
     }

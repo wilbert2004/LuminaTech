@@ -18,24 +18,31 @@ export const getPerfil = async (userId) => {
 }
 
 //trabajaremos en el resumen de cada dispositivo, para eso crearemos una funcion que jale los datos de cada dispositivo y los resuma en un solo objeto
-export const getResumenDispositivos = async () => {
+export const getResumenDispositivos = async (userId) => {
 
     //dispositivos
     const { count: dispositivos } = await supabase
         .from('dispositivos')
-        .select('*', { count: 'exact' });
-
+        .select('*', { count: 'exact' })
+        .eq('perfil_id', userId);
 
     //sensores
     const { count: sensores } = await supabase
         .from('sensores')
-        .select('*', { count: 'exact' });
+        .select(`
+            *,
+            dispositivos!inner (
+                perfil_id
+            )
+        `, { count: 'exact', head: true })
+        .eq('dispositivos.perfil_id', userId);
 
     // luces encendidas
     const { count: activos } = await supabase
         .from('dispositivos')
         .select('*', { count: 'exact', head: true })
-        .eq('estado', true);
+        .eq('estado', true)
+        .eq('perfil_id', userId);
 
 
     return { dispositivos, sensores, activos };

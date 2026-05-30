@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
 
-export const estilosDispositivos = StyleSheet.create({
-    // Contenedor base de la pantalla de dispositivos.
+export const estilosAdmin = StyleSheet.create({
+    // Contenedor principal de la pantalla de administración.
     contenedor: {
         flex: 1,
         backgroundColor: '#06101C',
     },
-    // Brillo superior para mantener la misma atmósfera visual del resto del proyecto.
+    // Brillo superior para darle profundidad al fondo.
     brilloSuperior: {
         position: 'absolute',
         top: -70,
@@ -16,7 +16,7 @@ export const estilosDispositivos = StyleSheet.create({
         borderRadius: 110,
         backgroundColor: 'rgba(0, 255, 156, 0.08)',
     },
-    // Brillo inferior para equilibrar el fondo oscuro.
+    // Brillo inferior para equilibrar la composición visual.
     brilloInferior: {
         position: 'absolute',
         bottom: -70,
@@ -26,20 +26,20 @@ export const estilosDispositivos = StyleSheet.create({
         borderRadius: 120,
         backgroundColor: 'rgba(127, 179, 255, 0.08)',
     },
-    // Contenido con espacio interno y desplazamiento vertical.
+    // Contenido con espacio y scroll vertical.
     contenido: {
         flexGrow: 1,
         paddingHorizontal: 20,
         paddingTop: 20,
         paddingBottom: 28,
     },
-    // Cuerpo principal centrado para pantallas anchas.
+    // Cuerpo centrado para pantallas amplias.
     cuerpo: {
         width: '100%',
         maxWidth: 980,
         alignSelf: 'center',
     },
-    // Tarjeta principal del módulo.
+    // Tarjeta superior de presentación.
     tarjetaPrincipal: {
         borderRadius: 30,
         padding: 22,
@@ -53,7 +53,7 @@ export const estilosDispositivos = StyleSheet.create({
         shadowOffset: { width: 0, height: 12 },
         elevation: 7,
     },
-    // Etiqueta pequeña que identifica el módulo.
+    // Etiqueta pequeña del módulo.
     etiqueta: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -68,7 +68,7 @@ export const estilosDispositivos = StyleSheet.create({
     iconoEtiqueta: {
         marginRight: 6,
     },
-    // Texto de la etiqueta superior.
+    // Texto de la etiqueta.
     textoEtiqueta: {
         color: '#7BFFD1',
         fontSize: 12,
@@ -76,7 +76,7 @@ export const estilosDispositivos = StyleSheet.create({
         letterSpacing: 0.7,
         textTransform: 'uppercase',
     },
-    // Título principal de la pantalla.
+    // Título principal.
     titulo: {
         color: '#F6F9FF',
         fontSize: 28,
@@ -84,19 +84,19 @@ export const estilosDispositivos = StyleSheet.create({
         lineHeight: 34,
         marginBottom: 10,
     },
-    // Subtítulo descriptivo del módulo.
+    // Subtítulo descriptivo.
     subtitulo: {
         color: '#9AA8C4',
         fontSize: 15,
         lineHeight: 22,
     },
-    // Fila donde se muestran las métricas o estado del módulo.
+    // Fila de chips informativos.
     filaMeta: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         marginTop: 16,
     },
-    // Chip reutilizable para mostrar estado rápido.
+    // Chip reutilizable.
     chip: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -109,17 +109,17 @@ export const estilosDispositivos = StyleSheet.create({
         marginRight: 10,
         marginBottom: 10,
     },
-    // Espaciado del icono dentro del chip.
+    // Separación del icono del chip.
     iconoChip: {
         marginRight: 6,
     },
-    // Texto interno del chip.
+    // Texto del chip.
     textoChip: {
         color: '#DDE7F6',
         fontSize: 12,
         fontWeight: '700',
     },
-    // Título de la sección de listado.
+    // Título de la sección de lista.
     tituloSeccion: {
         color: '#DCE7F7',
         fontSize: 18,
@@ -127,8 +127,8 @@ export const estilosDispositivos = StyleSheet.create({
         marginTop: 4,
         marginBottom: 14,
     },
-    // Tarjeta individual de un dispositivo.
-    tarjetaDispositivo: {
+    // Tarjeta individual de usuario pendiente.
+    tarjetaUsuario: {
         borderRadius: 24,
         padding: 18,
         marginBottom: 14,
@@ -141,65 +141,48 @@ export const estilosDispositivos = StyleSheet.create({
         shadowOffset: { width: 0, height: 10 },
         elevation: 5,
     },
-    // Encabezado de la tarjeta con icono y texto.
-    encabezadoDispositivo: {
-        flexDirection: 'row',
-        alignItems: 'center',
+    // Encabezado de la tarjeta con nombre y rol.
+    encabezadoUsuario: {
         marginBottom: 12,
     },
-    // Círculo del icono del dispositivo.
-    iconoDispositivo: {
-        width: 42,
-        height: 42,
-        borderRadius: 14,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginRight: 12,
-        backgroundColor: 'rgba(0, 255, 156, 0.10)',
-    },
-    // Contenedor del texto dentro de la tarjeta.
-    bloqueTexto: {
-        flex: 1,
-    },
-    // Nombre del dispositivo.
-    nombreDispositivo: {
+    // Nombre del usuario.
+    nombreUsuario: {
         color: '#F6F9FF',
         fontSize: 18,
         fontWeight: '900',
         marginBottom: 4,
     },
-    // Estado textual del dispositivo.
-    estadoDispositivo: {
+    // Rol o tipo de usuario.
+    rolUsuario: {
         color: '#9AA8C4',
         fontSize: 14,
         lineHeight: 20,
     },
-    // Fila de información secundaria.
-    filaInformacion: {
+    // Bloque informativo adicional.
+    bloqueInfo: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginTop: 6,
         marginBottom: 14,
     },
-    // Chip pequeño para ubicación.
-    chipUbicacion: {
+    // Chip de estado.
+    chipEstado: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 10,
         paddingVertical: 7,
         borderRadius: 999,
-        backgroundColor: 'rgba(127, 179, 255, 0.10)',
+        backgroundColor: 'rgba(255, 193, 7, 0.10)',
         marginRight: 10,
         marginBottom: 10,
     },
-    // Texto de ubicación.
-    textoUbicacion: {
-        color: '#DDE7F6',
+    // Texto del estado.
+    textoEstado: {
+        color: '#FFD76A',
         fontSize: 12,
         fontWeight: '700',
     },
-    // Botón para cambiar el estado del dispositivo.
-    botonEstado: {
+    // Botón principal para aprobar.
+    botonAprobar: {
         minHeight: 50,
         borderRadius: 16,
         paddingHorizontal: 16,
@@ -219,13 +202,14 @@ export const estilosDispositivos = StyleSheet.create({
         fontWeight: '900',
         letterSpacing: 0.3,
     },
-    // Texto usado en estados vacíos o de carga.
+    // Texto para estados vacíos o carga.
     estadoVacio: {
         color: '#A9B9D3',
         fontSize: 14,
         textAlign: 'center',
         marginTop: 18,
+        lineHeight: 20,
     },
 });
 
-export const Devicesstyle = estilosDispositivos;
+export const styles = estilosAdmin;

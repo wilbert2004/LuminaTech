@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import { usePerfil } from '../hook/useProfile';
 import { AuthContext } from '../../../context/AuthContext';
 import { formatearFecha } from '../../../utils/formatearFecha';
@@ -10,8 +11,11 @@ import { estilosPerfil } from '../style/Profilestyle';
 export const ProfileScreen = () => {
     // Obtenemos el usuario y la acción de cerrar sesión.
     const { user, logout } = useContext(AuthContext);
+    const navigation = useNavigation();
     // Cargamos el perfil desde el hook en español.
     const { perfil, loading } = usePerfil(user);
+    // Mientras se carga el perfil, mostramos una vista de carga.
+    const { rol, estado } = useContext(AuthContext);
 
     if (loading) {
         return (
@@ -57,10 +61,52 @@ export const ProfileScreen = () => {
                         </View>
 
                         <View style={estilosPerfil.filaDato}>
+                            <Text style={estilosPerfil.etiquetaDato}>Rol</Text>
+                            <Text style={estilosPerfil.valorDato}>{rol ?? 'Sin rol'}</Text>
+                        </View>
+
+                        <View style={estilosPerfil.filaDato}>
+                            <Text style={estilosPerfil.etiquetaDato}>Estado</Text>
+                            <Text style={estilosPerfil.valorDato}>{estado ?? 'Sin estado'}</Text>
+                        </View>
+
+                        <View style={estilosPerfil.filaDato}>
                             <Text style={estilosPerfil.etiquetaDato}>Fecha de alta</Text>
                             <Text style={estilosPerfil.valorDato}>{formatearFecha(perfil?.created_at)}</Text>
                         </View>
                     </View>
+
+                    {rol === 'admin' && (
+                        <TouchableOpacity
+                            style={estilosPerfil.botonAdministrarUsuarios}
+                            onPress={() => navigation.navigate('AdminUsuarios')}
+                        >
+                            <Ionicons name="people-outline" size={18} color="#7BFFD1" style={estilosPerfil.iconoBotonAdministrar} />
+                            <Text style={estilosPerfil.textoBotonAdministrar}>Administrar Usuarios</Text>
+                        </TouchableOpacity>
+
+
+                    )}
+
+                    {
+                        rol === 'admin' && (
+                            <TouchableOpacity
+                                style={estilosPerfil.botonAdmin}
+                                onPress={() => navigation.navigate('AdminDispositivos')}
+                            >
+                                <Ionicons
+                                    name="hardware-chip-outline"
+                                    size={20}
+                                    color="#06131F"
+                                    style={estilosPerfil.iconoBotonAdmin}
+                                />
+
+                                <Text style={estilosPerfil.textoBotonAdmin}>
+                                    Crear dispositivo
+                                </Text>
+                            </TouchableOpacity>
+                        )
+                    }
 
                     <TouchableOpacity style={estilosPerfil.botonCerrarSesion} onPress={logout}>
                         <Ionicons name="log-out-outline" size={18} color="#06131F" style={estilosPerfil.iconoBoton} />

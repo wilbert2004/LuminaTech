@@ -4,6 +4,10 @@ import { getSensores } from '../services/sensorsService';
 import { useState, useEffect } from 'react';
 //meteremos lecturas en tiempo real con useEffect 
 import { supabase } from '../../../lib/supebase';
+//importamos el auth context 
+import { AuthContext } from '../../../context/AuthContext';
+//usecontext para obtener el usuario autenticado y su perfil, para jalar los sensores de su perfil
+import { useContext } from 'react';
 
 
 //funcion de nuestro sensore hook 
@@ -11,9 +15,36 @@ export const useSensores = () => {
     //manejaremos estados 
     const [sensores, setSensores] = useState([]);
     const [loading, setLoading] = useState(false);
+    const { user } = useContext(AuthContext);
+
+
+    //funcion para jalar los sensores de un dispositivo
+    const fetchSensores = async () => {
+
+        //proteccion
+        if (!user) {
+            return;
+        }
+        try {
+            setLoading(true);
+            const data = await getSensores(user.id);
+            setSensores(data);
+        } catch (error) {
+            console.log("Error al obtener los sensores: " + error.message);
+
+        } finally {
+            setLoading(false);
+        }
+        //retornamos los sensores y el estado de carga
+    }
 
     ///useeffect para jalar los sensores al iniciar el componente
     useEffect(() => {
+
+        //proteccion
+        if (!user) {
+            return;
+        }
         fetchSensores();
 
         //realtime de lecturas de sensores
@@ -28,23 +59,9 @@ export const useSensores = () => {
         return () => {
             supabase.removeChannel(channel);
         }
-    }, []);
+    }, [user]);
 
-    //funcion para jalar los sensores de un dispositivo
-    const fetchSensores = async () => {
 
-        try {
-            setLoading(true);
-            const data = await getSensores();
-            setSensores(data);
-        } catch (error) {
-            console.log("Error al obtener los sensores: " + error.message);
-
-        } finally {
-            setLoading(false);
-        }
-        //retornamos los sensores y el estado de carga
-    }
 
     return { sensores, loading, fetchSensores };
 }

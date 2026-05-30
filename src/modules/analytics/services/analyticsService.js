@@ -1,9 +1,22 @@
 import { supabase } from '../../../lib/supebase'
 
-export const obtenerHistorialLecturas = async () => {
+export const obtenerHistorialLecturas = async (userId) => {
     const { data, error } = await supabase
         .from('lecturas')
-        .select('*,sensores (tipo , unidad)')
+        .select(`
+            *,
+            sensores!inner (
+                tipo,
+                unidad,
+                dispositivos!inner (
+                    id,
+                    nombre,
+                    ubicacion,
+                    perfil_id
+                )
+            )
+        `)
+        .eq('sensores.dispositivos.perfil_id', userId)
         .order('fecha', { ascending: false })
 
     if (error) {

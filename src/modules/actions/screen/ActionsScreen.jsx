@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,9 +7,18 @@ import { estilosAcciones } from '../style/actionsStyle';
 
 export const ActionsScreen = () => {
     // Obtenemos las acciones y las funciones de control desde el hook.
-    const { acciones, encenderDispositivo, apagarDispositivo, cargando } = useAcciones();
-    const dispositivoId = "87ff4bad-366d-4fec-bc90-65856ad1ab02";
-    const nombreDispositivo = useMemo(() => 'Control Aula A', []);
+    const {
+        acciones,
+        dispositivos,
+        dispositivoSeleccionado,
+        setDispositivoSeleccionado,
+        encenderDispositivo,
+        apagarDispositivo,
+        cargando
+    } = useAcciones();
+    const dispositivoActual = acciones?.[0]?.dispositivos ?? null;
+    const dispositivoId = dispositivoSeleccionado?.id;
+    const nombreDispositivo = dispositivoSeleccionado?.nombre ?? 'Sin dispositivo asignado';
 
     // Mientras cargan las acciones mostramos una vista mínima.
     if (cargando) {
@@ -68,7 +76,8 @@ export const ActionsScreen = () => {
                             <View style={estilosAcciones.filaBotones}>
                                 <TouchableOpacity
                                     style={[estilosAcciones.boton, estilosAcciones.botonEncender]}
-                                    onPress={() => encenderDispositivo(dispositivoId)}
+                                    onPress={() => dispositivoId && encenderDispositivo(dispositivoId)}
+                                    disabled={!dispositivoId}
                                 >
                                     <Ionicons name="flash-outline" size={18} color="#06131F" style={estilosAcciones.iconoBoton} />
                                     <Text style={estilosAcciones.textoBotonEncender}>Encender</Text>
@@ -76,7 +85,8 @@ export const ActionsScreen = () => {
 
                                 <TouchableOpacity
                                     style={[estilosAcciones.boton, estilosAcciones.botonApagar]}
-                                    onPress={() => apagarDispositivo(dispositivoId)}
+                                    onPress={() => dispositivoId && apagarDispositivo(dispositivoId)}
+                                    disabled={!dispositivoId}
                                 >
                                     <Ionicons name="power-outline" size={18} color="#EDF4FF" style={estilosAcciones.iconoBoton} />
                                     <Text style={estilosAcciones.textoBotonApagar}>Apagar</Text>

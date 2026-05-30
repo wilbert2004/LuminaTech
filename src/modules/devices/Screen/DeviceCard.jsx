@@ -1,5 +1,6 @@
 //importamos view , text 
-import { View, Text, Button } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
 //importamos nuestro style 
 import { Devicesstyle } from '../style/Devicesstyles';
 
@@ -12,14 +13,44 @@ export const DeviceCard = ({ dispositivo, toggleEstadoDispositivo, loading }) =>
         return null;
     }
     return (
-        <View style={Devicesstyle.tarjeta}>
-            <Text style={{ color: '#00FF9C', fontSize: 16, fontWeight: 'bold', marginBottom: 10 }}>{dispositivo.nombre}</Text>
-            <Text style={{ color: '#ffffff', marginBottom: 15 }}>{dispositivo.estado ? 'Encendido' : 'Apagado'}</Text>
-            <Button
-                title={dispositivo.estado ? 'Apagar' : 'Encender'}
+        <View style={Devicesstyle.tarjetaDispositivo}>
+            <View style={Devicesstyle.encabezadoDispositivo}>
+                <View style={Devicesstyle.iconoDispositivo}>
+                    <Ionicons name="flash-outline" size={18} color="#00FF9C" />
+                </View>
+
+                <View style={Devicesstyle.bloqueTexto}>
+                    <Text style={Devicesstyle.nombreDispositivo}>{dispositivo.nombre}</Text>
+                    <Text style={Devicesstyle.estadoDispositivo}>
+                        {dispositivo.estado ? 'Encendido' : 'Apagado'}
+                    </Text>
+                </View>
+            </View>
+
+            <View style={Devicesstyle.filaInformacion}>
+                {dispositivo.ubicacion ? (
+                    <View style={Devicesstyle.chipUbicacion}>
+                        <Ionicons name="location-outline" size={12} color="#7FB3FF" style={Devicesstyle.iconoChip} />
+                        <Text style={Devicesstyle.textoUbicacion}>{dispositivo.ubicacion}</Text>
+                    </View>
+                ) : null}
+            </View>
+
+            <TouchableOpacity
+                style={Devicesstyle.botonEstado}
                 onPress={() => toggleEstadoDispositivo(dispositivo)}
                 disabled={loading}
-            />
+            >
+                <Ionicons
+                    name={dispositivo.estado ? 'power-outline' : 'flash-outline'}
+                    size={18}
+                    color="#06131F"
+                    style={Devicesstyle.iconoBoton}
+                />
+                <Text style={Devicesstyle.textoBoton}>
+                    {dispositivo.estado ? 'APAGAR' : 'ENCENDER'}
+                </Text>
+            </TouchableOpacity>
 
         </View>
     )
