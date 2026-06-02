@@ -7,7 +7,8 @@ import {
     FlatList,
     ActivityIndicator,
     TouchableOpacity,
-    TextInput
+    TextInput,
+    Alert
 } from 'react-native';
 
 //el hook para obtener los dispositivos
@@ -25,18 +26,29 @@ export const AdminDevicesScreen = () => {
     //funcion para manejar la creacion de dispositivos
     const guardar = async () => {
         if (!nombre || !ubicacion || !usuarioSeleccionado) {
-            alert('Por favor completa todos los campos');
+            Alert.alert('Faltan datos', 'Por favor completa todos los campos para crear el dispositivo.');
             return;
         }
 
         const ok = await crearDispositivo(nombre, ubicacion, usuarioSeleccionado.id);
 
         if (ok) {
-            alert('Dispositivo creado con éxito');
+            Alert.alert('Dispositivo creado', 'El dispositivo y sus sensores quedaron vinculados correctamente.');
             setNombre('');
             setUbicacion('');
             setUsuarioSeleccionado(null);
+        } else {
+            Alert.alert('Error', 'No se pudo crear el dispositivo en este momento.');
         }
+    }
+
+    if (cargando) {
+        return (
+            <View style={{ flex: 1, padding: 20, backgroundColor: '#06101C', justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#00FF9C" />
+                <Text style={{ color: '#A9B9D3', marginTop: 14 }}>Cargando usuarios activos...</Text>
+            </View>
+        );
     }
 
     return (
@@ -77,6 +89,24 @@ export const AdminDevicesScreen = () => {
                 Asignar a usuario
             </Text>
 
+            {usuarios.length === 0 && (
+                <View style={{
+                    backgroundColor: '#0A1626',
+                    borderRadius: 12,
+                    padding: 16,
+                    marginBottom: 14,
+                    borderWidth: 1,
+                    borderColor: 'rgba(132, 196, 255, 0.12)'
+                }}>
+                    <Text style={{ color: '#F6F9FF', fontWeight: '800', marginBottom: 6 }}>
+                        Aún no hay aulas o dispositivos vinculados
+                    </Text>
+                    <Text style={{ color: '#A9B9D3', lineHeight: 20 }}>
+                        Cuando el administrador tenga usuarios activos, podrás asignarles dispositivos desde aquí.
+                    </Text>
+                </View>
+            )}
+
             <FlatList
                 data={usuarios}
                 keyExtractor={(item) => item.id}
@@ -108,10 +138,10 @@ export const AdminDevicesScreen = () => {
 
             <TouchableOpacity
                 onPress={guardar}
-                disabled={guardando}
+                disabled={guardando || usuarios.length === 0 || !usuarioSeleccionado}
                 style={{
                     marginTop: 20,
-                    backgroundColor: '#00FF9C',
+                    backgroundColor: guardando || usuarios.length === 0 || !usuarioSeleccionado ? 'rgba(0, 255, 156, 0.35)' : '#00FF9C',
                     padding: 15,
                     borderRadius: 12,
                     alignItems: 'center'

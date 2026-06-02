@@ -19,6 +19,7 @@ export const ActionsScreen = () => {
     const dispositivoActual = acciones?.[0]?.dispositivos ?? null;
     const dispositivoId = dispositivoSeleccionado?.id;
     const nombreDispositivo = dispositivoSeleccionado?.nombre ?? 'Sin dispositivo asignado';
+    const sinAcciones = acciones.length === 0;
 
     // Mientras cargan las acciones mostramos una vista mínima.
     if (cargando) {
@@ -27,7 +28,15 @@ export const ActionsScreen = () => {
                 <View style={estilosAcciones.brilloSuperior} />
                 <View style={estilosAcciones.brilloInferior} />
                 <View style={estilosAcciones.contenido}>
-                    <Text style={estilosAcciones.loadingText}>Cargando acciones...</Text>
+                    <View style={estilosAcciones.cuerpo}>
+                        <View style={estilosAcciones.tarjetaPrincipal}>
+                            <View style={estilosAcciones.loadingHeader}>
+                                <Ionicons name="hourglass-outline" size={18} color="#7BFFD1" style={estilosAcciones.loadingIcon} />
+                                <Text style={estilosAcciones.loadingTitle}>Cargando acciones...</Text>
+                            </View>
+                            <Text style={estilosAcciones.loadingText}>Estamos obteniendo el historial más reciente.</Text>
+                        </View>
+                    </View>
                 </View>
             </LinearGradient>
         );
@@ -73,6 +82,16 @@ export const ActionsScreen = () => {
                             <Text style={estilosAcciones.titulo}>Control del dispositivo</Text>
                             <Text style={estilosAcciones.subtitulo}>Usa los botones para enviar una acción manual al sistema.</Text>
 
+                            {!dispositivoId && (
+                                <View style={estilosAcciones.emptyStateWrap}>
+                                    <Ionicons name="alert-circle-outline" size={18} color="#FFD76A" style={estilosAcciones.emptyStateIcon} />
+                                    <Text style={estilosAcciones.emptyStateTitle}>Aún no tienes un dispositivo seleccionado</Text>
+                                    <Text style={estilosAcciones.emptyStateText}>
+                                        Cuando se asigne un dispositivo a tu perfil, podrás encenderlo o apagarlo desde aquí.
+                                    </Text>
+                                </View>
+                            )}
+
                             <View style={estilosAcciones.filaBotones}>
                                 <TouchableOpacity
                                     style={[estilosAcciones.boton, estilosAcciones.botonEncender]}
@@ -101,7 +120,15 @@ export const ActionsScreen = () => {
                 )}
                 ListEmptyComponent={(
                     <View style={estilosAcciones.cuerpo}>
-                        <Text style={estilosAcciones.estadoVacio}>No hay acciones registradas por ahora.</Text>
+                        <View style={estilosAcciones.tarjetaLista}>
+                            <View style={estilosAcciones.emptyStateWrap}>
+                                <Ionicons name="reader-outline" size={20} color="#7BFFD1" style={estilosAcciones.emptyStateIcon} />
+                                <Text style={estilosAcciones.emptyStateTitle}>No hay acciones registradas</Text>
+                                <Text style={estilosAcciones.emptyStateText}>
+                                    Cuando uses el control manual, aquí aparecerá tu actividad más reciente.
+                                </Text>
+                            </View>
+                        </View>
                     </View>
                 )}
                 renderItem={({ item }) => (

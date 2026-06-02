@@ -13,13 +13,29 @@ export const HomeScreen = () => {
     const [loggingOut, setLoggingOut] = useState(false);
     // Obtenemos el nombre del perfil, el estado de carga y el resumen del dashboard.
     const { nombre, loading, resumen } = UseHome(user);
+    const sinRecursos = resumen.dispositivos === 0 && resumen.sensores === 0 && resumen.activos === 0;
 
     // Mientras no exista usuario o aún se carguen los datos, mostramos una vista mínima.
     if (!user || loading) {
         return (
-            <View style={homestyle.contenedor}>
-                <Text style={homestyle.loadingText}>Cargando panel...</Text>
-            </View>
+            <LinearGradient colors={['#06101C', '#0A1626', '#06101C']} style={homestyle.contenedor}>
+                <View style={homestyle.glowTop} />
+                <View style={homestyle.glowBottom} />
+
+                <View style={homestyle.scrollContent}>
+                    <View style={homestyle.pageBody}>
+                        <View style={homestyle.heroCard}>
+                            <View style={homestyle.loadingHeader}>
+                                <Ionicons name="hourglass-outline" size={18} color="#7BFFD1" style={homestyle.loadingIcon} />
+                                <Text style={homestyle.loadingTitle}>Cargando panel...</Text>
+                            </View>
+                            <Text style={homestyle.loadingText}>
+                                Estamos preparando tu resumen con la información más reciente.
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            </LinearGradient>
         );
     }
 
@@ -75,6 +91,16 @@ export const HomeScreen = () => {
 
                     {/* Título de la sección de métricas. */}
                     <Text style={homestyle.sectionTitle}>Resumen general</Text>
+
+                    {sinRecursos && (
+                        <View style={homestyle.emptyStateCard}>
+                            <Ionicons name="cloud-offline-outline" size={20} color="#7BFFD1" style={homestyle.emptyStateIcon} />
+                            <Text style={homestyle.emptyStateTitle}>Aún no tienes aulas o dispositivos vinculados</Text>
+                            <Text style={homestyle.emptyStateText}>
+                                Cuando el administrador asigne recursos a tu perfil, aquí verás tu actividad y el estado del sistema.
+                            </Text>
+                        </View>
+                    )}
 
                     {/* Cuadrícula con métricas rápidas del sistema. */}
                     <View style={homestyle.statsGrid}>

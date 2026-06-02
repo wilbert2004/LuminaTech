@@ -35,23 +35,6 @@ export const DeviceCard = ({ dispositivo, toggleEstadoDispositivo, loading }) =>
                     </View>
                 ) : null}
             </View>
-
-            <TouchableOpacity
-                style={Devicesstyle.botonEstado}
-                onPress={() => toggleEstadoDispositivo(dispositivo)}
-                disabled={loading}
-            >
-                <Ionicons
-                    name={dispositivo.estado ? 'power-outline' : 'flash-outline'}
-                    size={18}
-                    color="#06131F"
-                    style={Devicesstyle.iconoBoton}
-                />
-                <Text style={Devicesstyle.textoBoton}>
-                    {dispositivo.estado ? 'APAGAR' : 'ENCENDER'}
-                </Text>
-            </TouchableOpacity>
-
         </View>
     )
 }

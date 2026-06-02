@@ -18,7 +18,17 @@ export const SensorsScreen = () => {
                 <View style={estilosSensores.brilloInferior} />
 
                 <View style={estilosSensores.contenido}>
-                    <Text style={estilosSensores.estadoVacio}>Cargando sensores...</Text>
+                    <View style={estilosSensores.pageBody}>
+                        <View style={estilosSensores.tarjetaPrincipal}>
+                            <View style={estilosSensores.loadingHeader}>
+                                <Ionicons name="hourglass-outline" size={18} color="#7BFFD1" style={estilosSensores.loadingIcon} />
+                                <Text style={estilosSensores.loadingTitle}>Cargando sensores...</Text>
+                            </View>
+                            <Text style={estilosSensores.estadoVacio}>
+                                Estamos cargando las últimas lecturas disponibles.
+                            </Text>
+                        </View>
+                    </View>
                 </View>
             </LinearGradient>
         );
@@ -64,14 +74,22 @@ export const SensorsScreen = () => {
                 )}
                 ListEmptyComponent={(
                     <View style={estilosSensores.pageBody}>
-                        <Text style={estilosSensores.estadoVacio}>No hay sensores disponibles por ahora.</Text>
+                        <View style={estilosSensores.tarjetaPrincipal}>
+                            <View style={estilosSensores.emptyStateWrap}>
+                                <Ionicons name="hardware-chip-outline" size={20} color="#7BFFD1" style={estilosSensores.emptyStateIcon} />
+                                <Text style={estilosSensores.emptyStateTitle}>No hay sensores registrados</Text>
+                                <Text style={estilosSensores.emptyStateText}>
+                                    Cuando el administrador vincule sensores a tus dispositivos, aparecerán aquí.
+                                </Text>
+                            </View>
+                        </View>
                     </View>
                 )}
                 renderItem={({ item }) => {
                     // Buscamos la última lectura del sensor para mostrar el dato más reciente.
                     const ultimaLectura = item.lecturas?.length > 0
                         ? item.lecturas[item.lecturas.length - 1].valor
-                        : 'Sin datos';
+                        : 'No hay lecturas todavía';
 
                     return (
                         <View style={estilosSensores.pageBody}>

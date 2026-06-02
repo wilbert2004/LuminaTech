@@ -189,4 +189,38 @@ export const estilosSensores = StyleSheet.create({
         textAlign: 'center',
         marginTop: 18,
     },
+    loadingHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 10,
+    },
+    loadingIcon: {
+        marginRight: 8,
+    },
+    loadingTitle: {
+        color: '#F6F9FF',
+        fontSize: 16,
+        fontWeight: '800',
+    },
+    emptyStateWrap: {
+        alignItems: 'center',
+        paddingVertical: 4,
+    },
+    emptyStateIcon: {
+        marginBottom: 10,
+    },
+    emptyStateTitle: {
+        color: '#F6F9FF',
+        fontSize: 16,
+        fontWeight: '800',
+        textAlign: 'center',
+        marginBottom: 6,
+    },
+    emptyStateText: {
+        color: '#9AA8C4',
+        fontSize: 14,
+        lineHeight: 20,
+        textAlign: 'center',
+    },
 });

@@ -247,6 +247,44 @@ export const homestyle = StyleSheet.create({
         textAlign: 'center',
         marginTop: 20,
     },
+    loadingHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    loadingIcon: {
+        marginRight: 8,
+    },
+    loadingTitle: {
+        color: '#F6F9FF',
+        fontSize: 16,
+        fontWeight: '800',
+    },
+    emptyStateCard: {
+        borderRadius: 24,
+        padding: 18,
+        marginBottom: 14,
+        backgroundColor: 'rgba(10, 19, 35, 0.96)',
+        borderWidth: 1,
+        borderColor: 'rgba(0, 255, 156, 0.12)',
+        alignItems: 'center',
+    },
+    emptyStateIcon: {
+        marginBottom: 10,
+    },
+    emptyStateTitle: {
+        color: '#F6F9FF',
+        fontSize: 16,
+        fontWeight: '800',
+        textAlign: 'center',
+        marginBottom: 6,
+    },
+    emptyStateText: {
+        color: '#9AA8C4',
+        fontSize: 14,
+        lineHeight: 20,
+        textAlign: 'center',
+    },
     // Pie de pantalla con nota de organización.
     footerText: {
         color: '#73829B',
