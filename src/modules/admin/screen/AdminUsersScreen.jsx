@@ -1,5 +1,5 @@
 //componente react native
-import { View, Text, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -9,6 +9,15 @@ import { estilosAdmin } from '../style/Adminstyle';
 
 export const AdminUsersScreen = () => {
     const { usuarios, aprobar, loading } = useAdmin();
+
+    const manejarAprobacion = async (userId) => {
+        try {
+            await aprobar(userId);
+            Alert.alert('Usuario aprobado', 'El perfil ya fue habilitado correctamente.');
+        } catch (error) {
+            Alert.alert('Error', 'No se pudo aprobar al usuario en este momento.');
+        }
+    };
 
     if (loading) {
         return (
@@ -70,7 +79,13 @@ export const AdminUsersScreen = () => {
                 ListEmptyComponent={(
                     <View style={estilosAdmin.cuerpo}>
                         <View style={estilosAdmin.tarjetaPrincipal}>
-                            <Text style={estilosAdmin.estadoVacio}>No hay usuarios pendientes en este momento.</Text>
+                            <View style={estilosAdmin.emptyStateWrap}>
+                                <Ionicons name="people-outline" size={20} color="#7BFFD1" style={estilosAdmin.emptyStateIcon} />
+                                <Text style={estilosAdmin.emptyStateTitle}>No hay usuarios pendientes</Text>
+                                <Text style={estilosAdmin.emptyStateText}>
+                                    Cuando alguien se registre y quede en espera, aparecerá aquí para aprobarlo.
+                                </Text>
+                            </View>
                         </View>
                     </View>
                 )}
@@ -90,7 +105,7 @@ export const AdminUsersScreen = () => {
                             </View>
 
                             <TouchableOpacity
-                                onPress={() => aprobar(item.id)}
+                                onPress={() => manejarAprobacion(item.id)}
                                 style={estilosAdmin.botonAprobar}
                             >
                                 <Ionicons name="checkmark-circle-outline" size={18} color="#06131F" style={estilosAdmin.iconoBoton} />

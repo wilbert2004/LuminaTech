@@ -38,7 +38,10 @@ export const DevicesScreen = () => {
                 <View style={Devicesstyle.contenido}>
                     <View style={Devicesstyle.cuerpo}>
                         <View style={Devicesstyle.tarjetaPrincipal}>
-                            <ActivityIndicator size="large" color="#00FF9C" />
+                            <View style={Devicesstyle.loadingHeader}>
+                                <ActivityIndicator size="large" color="#00FF9C" />
+                                <Text style={Devicesstyle.loadingTitle}>Cargando dispositivos...</Text>
+                            </View>
                             <Text style={Devicesstyle.estadoVacio}>Cargando dispositivos...</Text>
                         </View>
                     </View>
@@ -69,7 +72,7 @@ export const DevicesScreen = () => {
 
                             <Text style={Devicesstyle.titulo}>Dispositivos</Text>
                             <Text style={Devicesstyle.subtitulo}>
-                                Aquí revisas y controlas los dispositivos asignados a tu perfil dentro del sistema.
+                                Aquí revisas los dispositivos asignados a tu perfil dentro del sistema.
                             </Text>
 
                             <View style={Devicesstyle.filaMeta}>
@@ -91,7 +94,13 @@ export const DevicesScreen = () => {
                 ListEmptyComponent={(
                     <View style={Devicesstyle.cuerpo}>
                         <View style={Devicesstyle.tarjetaPrincipal}>
-                            <Text style={Devicesstyle.estadoVacio}>No hay dispositivos asignados a este perfil.</Text>
+                            <View style={Devicesstyle.emptyStateWrap}>
+                                <Ionicons name="hardware-chip-outline" size={20} color="#7BFFD1" style={Devicesstyle.emptyStateIcon} />
+                                <Text style={Devicesstyle.emptyStateTitle}>No tienes dispositivos asignados</Text>
+                                <Text style={Devicesstyle.emptyStateText}>
+                                    Cuando el administrador vincule equipos a tu perfil, aparecerán aquí para controlarlos.
+                                </Text>
+                            </View>
                         </View>
                     </View>
                 )}
