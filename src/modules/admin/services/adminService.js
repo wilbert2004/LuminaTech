@@ -38,39 +38,16 @@ export const obtenerUsuariosActivos = async () => {
 }
 
 
-//crear dispositivos con sensores 
+//crear dispositivos usando transacciones para asegurar la integridad de los datos
 export const crearDispositivoConSensores = async (nombre, ubicacion, perfilId) => {
-    const { data: dispositivo, error: dispositivoError } = await supabase
-        .from('dispositivos')
-        .insert({
-            nombre,
-            ubicacion,
-            estado: false,
-            perfil_id: perfilId
-        })
-        .select()
-        .single();
+    const { data, error } = await supabase.rpc('crear_dispositivo_con_sensores', {
+        p_nombre: nombre,
+        p_ubicacion: ubicacion,
+        p_perfil_id: perfilId
+    });
 
-    if (dispositivoError) throw dispositivoError;
+    if (error) throw error;
 
-    const sensores = [
-        {
-            dispositivo_id: dispositivo.id,
-            tipo: "PIR",
-            unidad: "Movimiento",
-        }, {
-            dispositivo_id: dispositivo.id,
-            tipo: "LDR",
-            unidad: "LUX",
-        }
-    ];
+    return data;
 
-    const { error: sensoresError } = await supabase
-        .from('sensores')
-        .insert(sensores);
-
-    //verificamos los errores
-    if (sensoresError) throw sensoresError;
-
-    return dispositivo;
 }

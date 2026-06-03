@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { getPerfil } from '../service/homeService';
 //creamos una funcion para manejar la logica de la pantalla de home
 import { getResumenDispositivos } from '../service/homeService';
+//importamos el servicio para obtener la ultima actividad
+import { getUltimaActividad } from '../service/homeService';
 
 
 //creamos una funcion para manejar la logica de la pantalla de home
@@ -11,7 +13,8 @@ export const UseHome = (user) => {
     //definimos los estados para el perfil y el error
     const [perfil, setPerfil] = useState('');
     const [loading, setLoading] = useState(true);
-
+    //usaremos estados para manejar el resumen de dispositivos, sensores y activos
+    const [ultimaActividad, setUltimaActividad] = useState(null);
     //agregamos estados para nuestro resumen de dispositivos
     const [resumen, setResumen] = useState({
         dispositivos: 0,
@@ -48,11 +51,25 @@ export const UseHome = (user) => {
             }
         };
 
+
+
+        //obtenemos la ultima actividad
+        const fetchUltimaActividad = async () => {
+            try {
+                const data = await getUltimaActividad(user.id);
+                setUltimaActividad(data);
+            } catch (error) {
+                console.error('Error al obtener la última actividad:', error);
+            }
+        };
+
         if (user) {
             fetchResumen();
+            fetchUltimaActividad();
+            fetchPerfil();
         }
     }, [user]);
 
     //retornamos el perfil y el estado de carga
-    return { nombre: perfil, loading, resumen };
+    return { nombre: perfil, loading, resumen, ultimaActividad };
 }
