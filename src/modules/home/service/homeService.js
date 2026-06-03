@@ -49,3 +49,15 @@ export const getResumenDispositivos = async (userId) => {
 
 
 }
+
+
+///haremos una subconsulta para obtener el ultimo actividad de la aula :
+export const getUltimaActividad = async (userId) => {
+    const { data, error } = await supabase.rpc('ultima_actividad_aula', { p_perfil_id: userId });
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return data?.[0] ?? null;
+}

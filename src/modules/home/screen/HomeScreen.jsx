@@ -5,6 +5,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { AuthContext } from '../../../context/AuthContext';
 import { UseHome } from '../hooks/useHome';
 import { homestyle } from '../style/Homestyle';
+// Función para formatear la fecha de la última actividad.
+import { formatearFecha } from '../../../utils/formatearFecha';
 
 export const HomeScreen = () => {
     // Obtenemos el usuario autenticado y la acción para cerrar sesión.
@@ -12,7 +14,7 @@ export const HomeScreen = () => {
     // Guardamos el estado del botón para evitar múltiples pulsaciones seguidas.
     const [loggingOut, setLoggingOut] = useState(false);
     // Obtenemos el nombre del perfil, el estado de carga y el resumen del dashboard.
-    const { nombre, loading, resumen } = UseHome(user);
+    const { nombre, loading, resumen, ultimaActividad } = UseHome(user);
     const sinRecursos = resumen.dispositivos === 0 && resumen.sensores === 0 && resumen.activos === 0;
 
     // Mientras no exista usuario o aún se carguen los datos, mostramos una vista mínima.
@@ -139,6 +141,49 @@ export const HomeScreen = () => {
                             <Text style={homestyle.statValue}>Live</Text>
                             <Text style={homestyle.statHint}>Monitoreo continuo</Text>
                         </View>
+                    </View>
+
+                    <View style={homestyle.actionCard}>
+                        <View style={homestyle.actionHeader}>
+                            <Ionicons
+                                name="pulse-outline"
+                                size={18}
+                                color="#00FF9C"
+                                style={homestyle.actionIcon}
+                            />
+
+                            <Text style={homestyle.actionTitle}>
+                                Última actividad del aula
+                            </Text>
+                        </View>
+
+                        {ultimaActividad ? (
+                            <>
+                                <Text style={homestyle.actionText}>
+                                    Dispositivo: {ultimaActividad.dispositivo}
+                                </Text>
+
+                                <Text style={homestyle.actionText}>
+                                    Ubicación: {ultimaActividad.ubicacion}
+                                </Text>
+
+                                <Text style={homestyle.actionText}>
+                                    Sensor: {ultimaActividad.sensor}
+                                </Text>
+
+                                <Text style={homestyle.actionText}>
+                                    Valor: {ultimaActividad.valor} {ultimaActividad.unidad}
+                                </Text>
+
+                                <Text style={homestyle.actionText}>
+                                    Fecha: {formatearFecha(ultimaActividad.fecha)}
+                                </Text>
+                            </>
+                        ) : (
+                            <Text style={homestyle.actionText}>
+                                Aún no hay lecturas registradas para tus dispositivos.
+                            </Text>
+                        )}
                     </View>
 
                     {/* Bloque de acción directa para una salida clara y ordenada. */}
