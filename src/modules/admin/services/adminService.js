@@ -29,13 +29,24 @@ export const aprobarUsuario = async (userId) => {
 export const obtenerUsuariosActivos = async () => {
     const { data, error } = await supabase
         .from('perfiles')
-        .select("id,nombre,rol,estado")
-        .eq("estado", "activo")
+        .select(`
+            id,
+            nombre,
+            rol,
+            estado,
+            dispositivos (
+                id,
+                nombre
+            )
+        `)
+        .eq('estado', 'activo')
+        .eq('rol', 'usuario')
         .order('nombre', { ascending: true });
 
     if (error) throw error;
+
     return data;
-}
+};
 
 
 //crear dispositivos usando transacciones para asegurar la integridad de los datos

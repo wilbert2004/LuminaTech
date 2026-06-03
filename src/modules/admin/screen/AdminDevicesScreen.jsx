@@ -113,12 +113,22 @@ export const AdminDevicesScreen = () => {
                 style={{ maxHeight: 220 }}
                 renderItem={({ item }) => {
                     const seleccionado = usuarioSeleccionado?.id === item.id;
+                    const yaTieneDispositivo = item.dispositivos?.length > 0;
 
                     return (
                         <TouchableOpacity
-                            onPress={() => setUsuarioSeleccionado(item)}
+                            disabled={yaTieneDispositivo}
+                            onPress={() => {
+                                if (!yaTieneDispositivo) {
+                                    setUsuarioSeleccionado(item);
+                                }
+                            }}
                             style={{
-                                backgroundColor: seleccionado ? '#00FF9C' : '#0A1626',
+                                backgroundColor: yaTieneDispositivo
+                                    ? 'rgba(255,255,255,0.05)'
+                                    : seleccionado
+                                        ? '#00FF9C'
+                                        : '#0A1626',
                                 padding: 14,
                                 borderRadius: 10,
                                 marginBottom: 10
@@ -129,7 +139,9 @@ export const AdminDevicesScreen = () => {
                             </Text>
 
                             <Text style={{ color: seleccionado ? '#06101F' : '#73829B' }}>
-                                {item.rol} - {item.estado}
+                                {yaTieneDispositivo
+                                    ? `Ya tiene aula: ${item.dispositivos[0]?.nombre}`
+                                    : `${item.rol} - ${item.estado} - disponible`}
                             </Text>
                         </TouchableOpacity>
                     );
