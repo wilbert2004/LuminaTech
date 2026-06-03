@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const isSmallScreen = Dimensions.get('window').width < 390;
 
 export const estilosAcciones = StyleSheet.create({
     contenedor: {
@@ -25,8 +27,8 @@ export const estilosAcciones = StyleSheet.create({
     },
     contenido: {
         flexGrow: 1,
-        paddingHorizontal: 20,
-        paddingTop: 20,
+        paddingHorizontal: isSmallScreen ? 16 : 20,
+        paddingTop: isSmallScreen ? 16 : 20,
         paddingBottom: 28,
     },
     cuerpo: {
@@ -36,7 +38,7 @@ export const estilosAcciones = StyleSheet.create({
     },
     tarjetaPrincipal: {
         borderRadius: 30,
-        padding: 22,
+        padding: isSmallScreen ? 18 : 22,
         marginBottom: 18,
         backgroundColor: 'rgba(10, 19, 35, 0.96)',
         borderWidth: 1,
@@ -69,14 +71,14 @@ export const estilosAcciones = StyleSheet.create({
     },
     titulo: {
         color: '#F6F9FF',
-        fontSize: 28,
+        fontSize: isSmallScreen ? 24 : 28,
         fontWeight: '900',
         lineHeight: 34,
         marginBottom: 10,
     },
     subtitulo: {
         color: '#9AA8C4',
-        fontSize: 15,
+        fontSize: isSmallScreen ? 14 : 15,
         lineHeight: 22,
     },
     filaDeEstado: {
@@ -106,19 +108,19 @@ export const estilosAcciones = StyleSheet.create({
     },
     tarjetaControl: {
         borderRadius: 24,
-        padding: 18,
+        padding: isSmallScreen ? 16 : 18,
         marginBottom: 18,
         backgroundColor: 'rgba(10, 19, 35, 0.96)',
         borderWidth: 1,
         borderColor: 'rgba(73, 140, 255, 0.16)',
     },
     filaBotones: {
-        flexDirection: 'row',
-        gap: 12,
+        flexDirection: isSmallScreen ? 'column' : 'row',
         marginTop: 14,
     },
     boton: {
-        flex: 1,
+        flex: isSmallScreen ? 0 : 1,
+        width: isSmallScreen ? '100%' : 'auto',
         minHeight: 52,
         borderRadius: 16,
         paddingHorizontal: 16,
@@ -128,11 +130,14 @@ export const estilosAcciones = StyleSheet.create({
     },
     botonEncender: {
         backgroundColor: '#00FF9C',
+        marginRight: isSmallScreen ? 0 : 12,
+        marginBottom: isSmallScreen ? 12 : 0,
     },
     botonApagar: {
         backgroundColor: 'rgba(127, 179, 255, 0.16)',
         borderWidth: 1,
         borderColor: 'rgba(127, 179, 255, 0.28)',
+        marginTop: isSmallScreen ? 0 : 0,
     },
     iconoBoton: {
         marginRight: 8,

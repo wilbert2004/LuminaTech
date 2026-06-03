@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const isSmallScreen = Dimensions.get('window').width < 390;
 
 export const estilosAdmin = StyleSheet.create({
     // Contenedor principal de la pantalla de administración.
@@ -29,8 +31,8 @@ export const estilosAdmin = StyleSheet.create({
     // Contenido con espacio y scroll vertical.
     contenido: {
         flexGrow: 1,
-        paddingHorizontal: 20,
-        paddingTop: 20,
+        paddingHorizontal: isSmallScreen ? 16 : 20,
+        paddingTop: isSmallScreen ? 16 : 20,
         paddingBottom: 28,
     },
     // Cuerpo centrado para pantallas amplias.
@@ -42,7 +44,7 @@ export const estilosAdmin = StyleSheet.create({
     // Tarjeta superior de presentación.
     tarjetaPrincipal: {
         borderRadius: 30,
-        padding: 22,
+        padding: isSmallScreen ? 18 : 22,
         marginBottom: 18,
         backgroundColor: 'rgba(10, 19, 35, 0.96)',
         borderWidth: 1,
@@ -79,7 +81,7 @@ export const estilosAdmin = StyleSheet.create({
     // Título principal.
     titulo: {
         color: '#F6F9FF',
-        fontSize: 28,
+        fontSize: isSmallScreen ? 24 : 28,
         fontWeight: '900',
         lineHeight: 34,
         marginBottom: 10,
@@ -87,7 +89,7 @@ export const estilosAdmin = StyleSheet.create({
     // Subtítulo descriptivo.
     subtitulo: {
         color: '#9AA8C4',
-        fontSize: 15,
+        fontSize: isSmallScreen ? 14 : 15,
         lineHeight: 22,
     },
     // Fila de chips informativos.
@@ -130,7 +132,7 @@ export const estilosAdmin = StyleSheet.create({
     // Tarjeta individual de usuario pendiente.
     tarjetaUsuario: {
         borderRadius: 24,
-        padding: 18,
+        padding: isSmallScreen ? 16 : 18,
         marginBottom: 14,
         backgroundColor: 'rgba(10, 19, 35, 0.96)',
         borderWidth: 1,

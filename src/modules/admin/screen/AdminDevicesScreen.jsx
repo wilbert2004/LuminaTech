@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 //componentes de react native
 import {
+    KeyboardAvoidingView,
+    Platform,
     View,
     Text,
     FlatList,
@@ -52,65 +54,73 @@ export const AdminDevicesScreen = () => {
     }
 
     return (
-        <View style={{ flex: 1, padding: 20, backgroundColor: '#06101C' }}>
-            <Text style={{ color: '#fff', fontSize: 24, fontWeight: 'bold', marginBottom: 20 }}>
-                Crear dispositivo
-            </Text>
-
-            <TextInput
-                placeholder="Nombre del dispositivo"
-                placeholderTextColor="#73829B"
-                value={nombre}
-                onChangeText={setNombre}
-                style={{
-                    backgroundColor: '#0A1626',
-                    color: '#fff',
-                    padding: 14,
-                    borderRadius: 10,
-                    marginBottom: 12
-                }}
-            />
-
-            <TextInput
-                placeholder="Ubicación / Aula"
-                placeholderTextColor="#73829B"
-                value={ubicacion}
-                onChangeText={setUbicacion}
-                style={{
-                    backgroundColor: '#0A1626',
-                    color: '#fff',
-                    padding: 14,
-                    borderRadius: 10,
-                    marginBottom: 20
-                }}
-            />
-
-            <Text style={{ color: '#7BFFD1', fontWeight: 'bold', marginBottom: 10 }}>
-                Asignar a usuario
-            </Text>
-
-            {usuarios.length === 0 && (
-                <View style={{
-                    backgroundColor: '#0A1626',
-                    borderRadius: 12,
-                    padding: 16,
-                    marginBottom: 14,
-                    borderWidth: 1,
-                    borderColor: 'rgba(132, 196, 255, 0.12)'
-                }}>
-                    <Text style={{ color: '#F6F9FF', fontWeight: '800', marginBottom: 6 }}>
-                        Aún no hay aulas o dispositivos vinculados
-                    </Text>
-                    <Text style={{ color: '#A9B9D3', lineHeight: 20 }}>
-                        Cuando el administrador tenga usuarios activos, podrás asignarles dispositivos desde aquí.
-                    </Text>
-                </View>
-            )}
-
+        <KeyboardAvoidingView
+            style={{ flex: 1, backgroundColor: '#06101C' }}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
             <FlatList
                 data={usuarios}
                 keyExtractor={(item) => item.id}
-                style={{ maxHeight: 220 }}
+                keyboardShouldPersistTaps="handled"
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{ flexGrow: 1, padding: 20, backgroundColor: '#06101C' }}
+                ListHeaderComponent={(
+                    <View>
+                        <Text style={{ color: '#fff', fontSize: 24, fontWeight: 'bold', marginBottom: 20 }}>
+                            Crear dispositivo
+                        </Text>
+
+                        <TextInput
+                            placeholder="Nombre del dispositivo"
+                            placeholderTextColor="#73829B"
+                            value={nombre}
+                            onChangeText={setNombre}
+                            style={{
+                                backgroundColor: '#0A1626',
+                                color: '#fff',
+                                padding: 14,
+                                borderRadius: 10,
+                                marginBottom: 12
+                            }}
+                        />
+
+                        <TextInput
+                            placeholder="Ubicación / Aula"
+                            placeholderTextColor="#73829B"
+                            value={ubicacion}
+                            onChangeText={setUbicacion}
+                            style={{
+                                backgroundColor: '#0A1626',
+                                color: '#fff',
+                                padding: 14,
+                                borderRadius: 10,
+                                marginBottom: 20
+                            }}
+                        />
+
+                        <Text style={{ color: '#7BFFD1', fontWeight: 'bold', marginBottom: 10 }}>
+                            Asignar a usuario
+                        </Text>
+
+                        {usuarios.length === 0 && (
+                            <View style={{
+                                backgroundColor: '#0A1626',
+                                borderRadius: 12,
+                                padding: 16,
+                                marginBottom: 14,
+                                borderWidth: 1,
+                                borderColor: 'rgba(132, 196, 255, 0.12)'
+                            }}>
+                                <Text style={{ color: '#F6F9FF', fontWeight: '800', marginBottom: 6 }}>
+                                    Aún no hay aulas o dispositivos vinculados
+                                </Text>
+                                <Text style={{ color: '#A9B9D3', lineHeight: 20 }}>
+                                    Cuando el administrador tenga usuarios activos, podrás asignarles dispositivos desde aquí.
+                                </Text>
+                            </View>
+                        )}
+                    </View>
+                )}
                 renderItem={({ item }) => {
                     const seleccionado = usuarioSeleccionado?.id === item.id;
                     const yaTieneDispositivo = item.dispositivos?.length > 0;
@@ -146,24 +156,25 @@ export const AdminDevicesScreen = () => {
                         </TouchableOpacity>
                     );
                 }}
+                ListFooterComponent={(
+                    <TouchableOpacity
+                        onPress={guardar}
+                        disabled={guardando || usuarios.length === 0 || !usuarioSeleccionado}
+                        style={{
+                            marginTop: 10,
+                            backgroundColor: guardando || usuarios.length === 0 || !usuarioSeleccionado ? 'rgba(0, 255, 156, 0.35)' : '#00FF9C',
+                            padding: 15,
+                            borderRadius: 12,
+                            alignItems: 'center'
+                        }}
+                    >
+                        <Text style={{ color: '#06131F', fontWeight: 'bold' }}>
+                            {guardando ? 'Guardando...' : 'Crear dispositivo con sensores'}
+                        </Text>
+                    </TouchableOpacity>
+                )}
             />
-
-            <TouchableOpacity
-                onPress={guardar}
-                disabled={guardando || usuarios.length === 0 || !usuarioSeleccionado}
-                style={{
-                    marginTop: 20,
-                    backgroundColor: guardando || usuarios.length === 0 || !usuarioSeleccionado ? 'rgba(0, 255, 156, 0.35)' : '#00FF9C',
-                    padding: 15,
-                    borderRadius: 12,
-                    alignItems: 'center'
-                }}
-            >
-                <Text style={{ color: '#06101F', fontWeight: 'bold' }}>
-                    {guardando ? 'Guardando...' : 'Crear dispositivo con sensores'}
-                </Text>
-            </TouchableOpacity>
-        </View>
+        </KeyboardAvoidingView>
     )
 
 }

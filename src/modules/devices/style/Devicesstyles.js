@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const isSmallScreen = Dimensions.get('window').width < 390;
 
 export const estilosDispositivos = StyleSheet.create({
     // Contenedor base de la pantalla de dispositivos.
@@ -29,8 +31,8 @@ export const estilosDispositivos = StyleSheet.create({
     // Contenido con espacio interno y desplazamiento vertical.
     contenido: {
         flexGrow: 1,
-        paddingHorizontal: 20,
-        paddingTop: 20,
+        paddingHorizontal: isSmallScreen ? 16 : 20,
+        paddingTop: isSmallScreen ? 16 : 20,
         paddingBottom: 28,
     },
     // Cuerpo principal centrado para pantallas anchas.
@@ -42,7 +44,7 @@ export const estilosDispositivos = StyleSheet.create({
     // Tarjeta principal del módulo.
     tarjetaPrincipal: {
         borderRadius: 30,
-        padding: 22,
+        padding: isSmallScreen ? 18 : 22,
         marginBottom: 18,
         backgroundColor: 'rgba(10, 19, 35, 0.96)',
         borderWidth: 1,
@@ -79,7 +81,7 @@ export const estilosDispositivos = StyleSheet.create({
     // Título principal de la pantalla.
     titulo: {
         color: '#F6F9FF',
-        fontSize: 28,
+        fontSize: isSmallScreen ? 24 : 28,
         fontWeight: '900',
         lineHeight: 34,
         marginBottom: 10,
@@ -87,7 +89,7 @@ export const estilosDispositivos = StyleSheet.create({
     // Subtítulo descriptivo del módulo.
     subtitulo: {
         color: '#9AA8C4',
-        fontSize: 15,
+        fontSize: isSmallScreen ? 14 : 15,
         lineHeight: 22,
     },
     // Fila donde se muestran las métricas o estado del módulo.
@@ -130,7 +132,7 @@ export const estilosDispositivos = StyleSheet.create({
     // Tarjeta individual de un dispositivo.
     tarjetaDispositivo: {
         borderRadius: 24,
-        padding: 18,
+        padding: isSmallScreen ? 16 : 18,
         marginBottom: 14,
         backgroundColor: 'rgba(10, 19, 35, 0.96)',
         borderWidth: 1,
@@ -271,13 +273,13 @@ export const estilosDispositivos = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 10,
-        gap: 8,
     },
 
     configTitulo: {
         color: '#00FF9C',
         fontSize: 14,
         fontWeight: '800',
+        marginLeft: 8,
     },
 
     configTexto: {
@@ -323,13 +325,13 @@ export const estilosDispositivos = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        gap: 8,
     },
 
     textoBotonCopiarTodo: {
         color: '#06131F',
         fontWeight: '800',
         fontSize: 14,
+        marginLeft: 8,
     },
 });
 

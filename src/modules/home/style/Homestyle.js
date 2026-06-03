@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const isSmallScreen = Dimensions.get('window').width < 390;
 
 export const homestyle = StyleSheet.create({
     // Contenedor base del home para sostener el fondo general.
@@ -9,8 +11,8 @@ export const homestyle = StyleSheet.create({
     // Desplazamiento vertical del contenido principal.
     scrollContent: {
         flexGrow: 1,
-        paddingHorizontal: 20,
-        paddingTop: 20,
+        paddingHorizontal: isSmallScreen ? 16 : 20,
+        paddingTop: isSmallScreen ? 16 : 20,
         paddingBottom: 28,
     },
     // Cuerpo centrado para evitar que el contenido use todo el ancho en pantallas grandes.
@@ -42,7 +44,7 @@ export const homestyle = StyleSheet.create({
     // Tarjeta principal del dashboard.
     heroCard: {
         borderRadius: 30,
-        padding: 22,
+        padding: isSmallScreen ? 18 : 22,
         marginBottom: 18,
         backgroundColor: 'rgba(10, 19, 35, 0.96)',
         borderWidth: 1,
@@ -79,7 +81,7 @@ export const homestyle = StyleSheet.create({
     // Título principal de bienvenida.
     title: {
         color: '#F6F9FF',
-        fontSize: 28,
+        fontSize: isSmallScreen ? 24 : 28,
         fontWeight: '900',
         lineHeight: 34,
         marginBottom: 10,
@@ -87,7 +89,7 @@ export const homestyle = StyleSheet.create({
     // Descripción breve del panel.
     subtitle: {
         color: '#9AA8C4',
-        fontSize: 15,
+        fontSize: isSmallScreen ? 14 : 15,
         lineHeight: 22,
     },
     // Fila de chips informativos dentro del hero.
@@ -139,11 +141,11 @@ export const homestyle = StyleSheet.create({
     },
     // Tarjeta de estadística individual.
     statCard: {
-        width: '48%',
+        width: isSmallScreen ? '100%' : '48%',
         maxWidth: 470,
-        minHeight: 128,
+        minHeight: isSmallScreen ? 118 : 128,
         borderRadius: 24,
-        padding: 18,
+        padding: isSmallScreen ? 16 : 18,
         marginBottom: 14,
         backgroundColor: 'rgba(10, 19, 35, 0.94)',
         borderWidth: 1,
@@ -176,7 +178,7 @@ export const homestyle = StyleSheet.create({
     // Valor principal de la métrica.
     statValue: {
         color: '#FFFFFF',
-        fontSize: 28,
+        fontSize: isSmallScreen ? 24 : 28,
         fontWeight: '900',
     },
     // Nota secundaria de la métrica.
@@ -189,7 +191,7 @@ export const homestyle = StyleSheet.create({
     // Tarjeta de acción rápida.
     actionCard: {
         borderRadius: 24,
-        padding: 18,
+        padding: isSmallScreen ? 16 : 18,
         marginTop: 4,
         marginBottom: 14,
         backgroundColor: 'rgba(10, 19, 35, 0.96)',
