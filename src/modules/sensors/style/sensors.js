@@ -1,5 +1,7 @@
 // Importamos StyleSheet para definir estilos aislados del módulo.
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const isSmallScreen = Dimensions.get('window').width < 390;
 
 export const estilosSensores = StyleSheet.create({
     // Contenedor principal con fondo oscuro y espacio lateral.
@@ -30,8 +32,8 @@ export const estilosSensores = StyleSheet.create({
     // Área desplazable del contenido.
     contenido: {
         flexGrow: 1,
-        paddingHorizontal: 20,
-        paddingTop: 20,
+        paddingHorizontal: isSmallScreen ? 16 : 20,
+        paddingTop: isSmallScreen ? 16 : 20,
         paddingBottom: 28,
     },
     // Cuerpo centrado para evitar que el contenido use todo el ancho en desktop.
@@ -43,7 +45,7 @@ export const estilosSensores = StyleSheet.create({
     // Tarjeta superior del módulo.
     tarjetaPrincipal: {
         borderRadius: 30,
-        padding: 22,
+        padding: isSmallScreen ? 18 : 22,
         marginBottom: 18,
         backgroundColor: 'rgba(10, 19, 35, 0.96)',
         borderWidth: 1,
@@ -74,7 +76,7 @@ export const estilosSensores = StyleSheet.create({
     // Título principal del módulo de sensores.
     titulo: {
         color: '#F6F9FF',
-        fontSize: 28,
+        fontSize: isSmallScreen ? 24 : 28,
         fontWeight: '900',
         lineHeight: 34,
         marginBottom: 10,
@@ -82,7 +84,7 @@ export const estilosSensores = StyleSheet.create({
     // Descripción breve para explicar el contenido.
     subtitulo: {
         color: '#9AA8C4',
-        fontSize: 15,
+        fontSize: isSmallScreen ? 14 : 15,
         lineHeight: 22,
     },
     // Fila con chips informativos.
@@ -126,7 +128,7 @@ export const estilosSensores = StyleSheet.create({
     tarjetaSensor: {
         width: '100%',
         borderRadius: 24,
-        padding: 18,
+        padding: isSmallScreen ? 16 : 18,
         marginBottom: 14,
         backgroundColor: 'rgba(10, 19, 35, 0.94)',
         borderWidth: 1,

@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+
+const isSmallScreen = Dimensions.get('window').width < 390;
 
 export const estilosPerfil = StyleSheet.create({
     contenedor: {
@@ -25,8 +27,8 @@ export const estilosPerfil = StyleSheet.create({
     },
     contenido: {
         flexGrow: 1,
-        paddingHorizontal: 20,
-        paddingTop: 20,
+        paddingHorizontal: isSmallScreen ? 16 : 20,
+        paddingTop: isSmallScreen ? 16 : 20,
         paddingBottom: 28,
     },
     cuerpo: {
@@ -36,7 +38,7 @@ export const estilosPerfil = StyleSheet.create({
     },
     tarjetaPrincipal: {
         borderRadius: 30,
-        padding: 22,
+        padding: isSmallScreen ? 18 : 22,
         marginBottom: 18,
         backgroundColor: 'rgba(10, 19, 35, 0.96)',
         borderWidth: 1,
@@ -69,19 +71,19 @@ export const estilosPerfil = StyleSheet.create({
     },
     titulo: {
         color: '#F6F9FF',
-        fontSize: 28,
+        fontSize: isSmallScreen ? 24 : 28,
         fontWeight: '900',
         lineHeight: 34,
         marginBottom: 10,
     },
     subtitulo: {
         color: '#9AA8C4',
-        fontSize: 15,
+        fontSize: isSmallScreen ? 14 : 15,
         lineHeight: 22,
     },
     tarjetaDatos: {
         borderRadius: 24,
-        padding: 18,
+        padding: isSmallScreen ? 16 : 18,
         marginBottom: 18,
         backgroundColor: 'rgba(10, 19, 35, 0.96)',
         borderWidth: 1,

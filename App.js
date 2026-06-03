@@ -21,6 +21,7 @@ import { initDatabase } from './src/database/sqlite';
 
 //importar los LogBox para depurar la base de datos
 import { LogBox } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 //importamos el pending screen
 import { PendingScreen } from './src/modules/pending/screen/PendingScreen';
@@ -75,9 +76,11 @@ export default function App() {
 
   }, []);
   return (
-    <AuthProvider>
-      <MainApp />
-    </AuthProvider>
+    <SafeAreaProvider>
+      <AuthProvider>
+        <MainApp />
+      </AuthProvider>
+    </SafeAreaProvider>
   );
 }
 
