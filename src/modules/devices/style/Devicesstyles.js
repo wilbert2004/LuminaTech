@@ -258,6 +258,79 @@ export const estilosDispositivos = StyleSheet.create({
         lineHeight: 20,
         textAlign: 'center',
     },
+    configArduino: {
+        marginTop: 16,
+        padding: 14,
+        borderRadius: 14,
+        backgroundColor: 'rgba(0, 255, 156, 0.07)',
+        borderWidth: 1,
+        borderColor: 'rgba(0, 255, 156, 0.18)',
+    },
+
+    configHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 10,
+        gap: 8,
+    },
+
+    configTitulo: {
+        color: '#00FF9C',
+        fontSize: 14,
+        fontWeight: '800',
+    },
+
+    configTexto: {
+        color: '#DDEBFF',
+        fontSize: 12,
+        fontFamily: 'monospace',
+        marginBottom: 6,
+    },
+    configDescripcion: {
+        color: '#A8B6CC',
+        fontSize: 13,
+        marginBottom: 14,
+        lineHeight: 20,
+    },
+
+    botonCopiar: {
+        backgroundColor: 'rgba(255,255,255,0.04)',
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.08)',
+        borderRadius: 12,
+        padding: 12,
+        marginBottom: 10,
+    },
+
+    labelId: {
+        color: '#7FB3FF',
+        fontSize: 12,
+        fontWeight: '700',
+        marginBottom: 6,
+    },
+
+    idTexto: {
+        color: '#DDEBFF',
+        fontSize: 12,
+        fontFamily: 'monospace',
+    },
+
+    botonCopiarTodo: {
+        marginTop: 12,
+        backgroundColor: '#00FF9C',
+        borderRadius: 12,
+        paddingVertical: 14,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        gap: 8,
+    },
+
+    textoBotonCopiarTodo: {
+        color: '#06131F',
+        fontWeight: '800',
+        fontSize: 14,
+    },
 });
 
 export const Devicesstyle = estilosDispositivos;
