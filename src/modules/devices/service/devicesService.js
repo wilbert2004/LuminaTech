@@ -6,7 +6,13 @@ import { saveDeviceLocal } from '../../../database/deviceLocalService';
 export const getResumenDispositivos = async (userId) => {
     const { data, error } = await supabase
         .from('dispositivos')
-        .select('*')
+        .select(`*,
+    sensores (
+        id,
+        tipo,
+        unidad
+    )
+`)
         .eq('perfil_id', userId);
 
     if (error) throw error;
