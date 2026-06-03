@@ -56,6 +56,12 @@ String dispositivoId = "${dispositivo.id}";
                             ? 'Encendido'
                             : 'Apagado'}
                     </Text>
+
+                    <Text style={Devicesstyle.estadoDispositivo}>
+                        Última actividad: {dispositivo.ultima_actividad
+                            ? new Date(dispositivo.ultima_actividad).toLocaleString()
+                            : 'Sin actividad'}
+                    </Text>
                 </View>
             </View>
 
