@@ -17,3 +17,20 @@ export const obtenerPerfilUsuario = async (userId) => {
 
 export const getPerfilUsuario = obtenerPerfilUsuario;
 
+
+//crear una fución para actualizar el perfil del usuario
+export const actualizarNombrePerfil = async (userId, nuevoNombre) => {
+    const { data, error } = await supabase
+        .from('perfiles')
+        .update({ nombre: nuevoNombre })
+        .eq('id', userId)
+        .select()
+        .single();
+
+    //error
+    if (error) {
+        throw error;
+    }
+    return data;
+}
+

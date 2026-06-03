@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 import { obtenerPerfilUsuario } from '../services/profileService';
+//importamos nuestro servicio de actualizar el nombre del perfil
+import { actualizarNombrePerfil } from '../services/profileService';
 
 export const usePerfil = (user) => {
     const [perfil, setPerfil] = useState(null);
     const [loading, setLoading] = useState(true);
+    // Función para actualizar el nombre del perfil del usuario
+
 
     useEffect(() => {
         const cargarPerfil = async () => {
@@ -29,9 +33,25 @@ export const usePerfil = (user) => {
         cargarPerfil();
     }, [user?.id])
 
+    // Función para actualizar el nombre del perfil del usuario
+    const actualizarNombre = async (nuevoNombre) => {
+        try {
+            const data = await actualizarNombrePerfil(user.id, nuevoNombre);
+            setPerfil(data); // Actualizamos el estado del perfil con los nuevos datos
+            return true;
+        } catch (error) {
+            console.error('Error al actualizar el nombre del perfil:', error);
+            return false;
+        } finally {
+            setLoading(false);
+        }
+
+    }
+
     return {
         perfil,
         loading,
+        actualizarNombre, // Exportamos la función para actualizar el nombre del perfil
     }
 }
 

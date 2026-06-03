@@ -24,6 +24,15 @@ export const aprobarUsuario = async (userId) => {
     if (error) throw error;
 
 }
+//funcion de rechazar usuario para el admin
+export const rechazarUsuario = async (userId) => {
+    const { error } = await supabase
+        .from('perfiles')
+        .update({ estado: 'rechazado' })
+        .eq('id', userId);
+
+    if (error) throw error;
+}
 
 ////obtener usuarios activos para el admin
 export const obtenerUsuariosActivos = async () => {

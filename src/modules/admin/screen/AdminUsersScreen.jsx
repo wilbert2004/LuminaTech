@@ -8,7 +8,7 @@ import { useAdmin } from '../hooks/usePendingUsers';
 import { estilosAdmin } from '../style/Adminstyle';
 
 export const AdminUsersScreen = () => {
-    const { usuarios, aprobar, loading } = useAdmin();
+    const { usuarios, aprobar, loading, rechazar } = useAdmin();
 
     const manejarAprobacion = async (userId) => {
         try {
@@ -16,6 +16,16 @@ export const AdminUsersScreen = () => {
             Alert.alert('Usuario aprobado', 'El perfil ya fue habilitado correctamente.');
         } catch (error) {
             Alert.alert('Error', 'No se pudo aprobar al usuario en este momento.');
+        }
+    };
+
+    //funcion para manejar el rechazo del usuario
+    const manejarRechazo = async (userId) => {
+        try {
+            await rechazar(userId);
+            Alert.alert('Usuario rechazado', 'El perfil ha sido rechazado y no podrá acceder al sistema.');
+        } catch (error) {
+            Alert.alert('Error', 'No se pudo rechazar al usuario en este momento.');
         }
     };
 
@@ -104,13 +114,62 @@ export const AdminUsersScreen = () => {
                                 </View>
                             </View>
 
-                            <TouchableOpacity
-                                onPress={() => manejarAprobacion(item.id)}
-                                style={estilosAdmin.botonAprobar}
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                    gap: 10,
+                                    marginTop: 12
+                                }}
                             >
-                                <Ionicons name="checkmark-circle-outline" size={18} color="#06131F" style={estilosAdmin.iconoBoton} />
-                                <Text style={estilosAdmin.textoBoton}>Aprobar</Text>
-                            </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    onPress={() => manejarAprobacion(item.id)}
+                                    style={[
+                                        estilosAdmin.botonAprobar,
+                                        { flex: 1 }
+                                    ]}
+                                >
+                                    <Ionicons
+                                        name="checkmark-circle-outline"
+                                        size={18}
+                                        color="#06131F"
+                                        style={estilosAdmin.iconoBoton}
+                                    />
+
+                                    <Text style={estilosAdmin.textoBoton}>
+                                        Aprobar
+                                    </Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    onPress={() => manejarRechazo(item.id)}
+                                    style={{
+                                        flex: 1,
+                                        backgroundColor: '#FF4D67',
+                                        borderRadius: 6,
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        padding: 8
+                                    }}
+                                >
+                                    <Ionicons
+                                        name="close-circle-outline"
+                                        size={18}
+                                        color="#fff"
+                                    />
+
+                                    <Text
+                                        style={{
+                                            color: '#fff',
+                                            fontWeight: 'bold',
+                                            marginTop: 4
+                                        }}
+                                    >
+                                        Rechazar
+                                    </Text>
+                                </TouchableOpacity>
+
+                            </View>
                         </View>
                     </View>
                 )}
